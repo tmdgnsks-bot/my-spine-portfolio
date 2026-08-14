@@ -57,4 +57,18 @@ const works = [
     backgroundColor: "#1a1a2eff",
     spineVersion: "4.3",
   },
+
+ {
+    id: "ar15",
+    title: "리니지w 마법사 튜토리얼 npc",
+    role: "리깅 & 애니메이션",
+    tags: ["npc캐릭터"],
+    description: "리니지w외주 작업",
+    skeleton: "assets/ar15/AR15.json",
+    atlas: "assets/ar15/AR15.atlas",
+    animation: "idle",
+    backgroundColor: "#1a1a2eff",
+    spineVersion: "4.3",
+  },
+
 ];
