@@ -58,7 +58,7 @@ const works = [
     spineVersion: "4.3",
   },
 
- {
+  {
     id: "AR15",
     title: "소녀전선 습작",
     role: "리깅 & 애니메이션",
@@ -69,6 +69,6 @@ const works = [
     animation: "idle",
     backgroundColor: "#1a1a2eff",
     spineVersion: "4.3",
-  },
+   },
 
 ];
