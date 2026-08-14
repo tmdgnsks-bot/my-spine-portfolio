@@ -47,13 +47,13 @@ const works = [
   // 아래에 본인 작업물을 추가하세요. 예시:
   //
   // {
-  //   id: "dragon-boss",
-  //   title: "드래곤 보스 몬스터",
+  //   id: "Portrait_NPC_Mento_MA",
+  //   title: "리니지w 마법사 튜토리얼 npc",
   //   role: "리깅 & 애니메이션",
-  //   tags: ["몬스터", "보스", "메시 디포밍"],
-  //   description: "모바일 RPG용 보스 몬스터. IK 기반 날개 애니메이션과 메시 디포밍을 활용했습니다.",
-  //   skeleton: "assets/dragon-boss/dragon.json",
-  //   atlas: "assets/dragon-boss/dragon.atlas",
+  //   tags: ["npc캐릭터"],
+  //   description: "리니지w외주 작업",
+  //   skeleton: "assets/nc1/Portrait_NPC_Mento_MA.json",
+  //   atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas.txt",
   //   animation: "idle",
   //   backgroundColor: "#1a1a2eff",
   //   spineVersion: "4.2",
