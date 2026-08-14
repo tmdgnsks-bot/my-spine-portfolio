@@ -23,6 +23,11 @@
  *    skin        : (선택) 기본으로 보여줄 스킨 이름
  *    backgroundColor : 뷰어 배경색 (16진수 RGBA, 예: "#1a1a2eff")
  *    spineVersion : 이 작업물을 내보낸 스파인 에디터 버전 (예: "4.2"). 참고용 표시.
+ *    thumbnail   : (선택) 카드에 보여줄 미리보기 이미지 경로. 클릭하기 전에도
+ *                  작업물이 뭔지 보이게 해줌. 없으면 기본 플레이스홀더로 표시됨.
+ *                  - 정적 이미지: .png/.jpg (스파인 에디터에서 캡처하거나 스크린샷)
+ *                  - 움직이는 미리보기: .gif (브라우저에서 자동 재생됨, 별도 코드 불필요)
+ *                  - 권장 비율 4:3, 너무 큰 용량은 로딩이 느려지니 1MB 이하 권장
  *
  * 팁: 스파인 버전은 내보낸 json 파일을 열어 최상단
  *     "skeleton": { "spine": "4.2.33", ... } 부분에서 확인할 수 있습니다.
@@ -42,9 +47,9 @@ const works = [
     skin: "default",
     backgroundColor: "#14141fff",
     spineVersion: "4.3",
+    thumbnail: "assets/spineboy-demo/thumbnail.png",
   },
 
- 
   {
     id: "Portrait_NPC_Mento_MA",
     title: "리니지w 마법사 튜토리얼 npc",
@@ -56,6 +61,7 @@ const works = [
     animation: "idle",
     backgroundColor: "#1a1a2eff",
     spineVersion: "4.3",
+    thumbnail: "assets/spineboy-demo/thumbnail.png",
   },
 
   {
@@ -69,6 +75,7 @@ const works = [
     animation: "idle",
     backgroundColor: "#1a1a2eff",
     spineVersion: "4.3",
+    thumbnail: "assets/spineboy-demo/thumbnail.png",
    },
 
 ];

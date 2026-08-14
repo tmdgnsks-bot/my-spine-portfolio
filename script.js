@@ -23,8 +23,11 @@ function renderGrid() {
   works.forEach((work) => {
     const card = document.createElement("div");
     card.className = "card";
+    const thumbImg = work.thumbnail
+      ? `<img src="${work.thumbnail}" alt="${escapeHtml(work.title)} 썸네일" loading="lazy" />`
+      : "";
     card.innerHTML = `
-      <div class="thumb"><div class="play-badge">▶</div></div>
+      <div class="thumb">${thumbImg}<div class="play-badge">▶</div></div>
       <div class="body">
         <h3>${escapeHtml(work.title)}</h3>
         <p class="role">${escapeHtml(work.role || "")}</p>
