@@ -53,7 +53,7 @@ const works = [
   //   tags: ["npc캐릭터"],
   //   description: "리니지w외주 작업",
   //   skeleton: "assets/nc1/Portrait_NPC_Mento_MA.json",
-  //   atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas.txt",
+  //   atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas",
   //   animation: "idle",
   //   backgroundColor: "#1a1a2eff",
   //   spineVersion: "4.2",
