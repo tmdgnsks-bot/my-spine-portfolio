@@ -59,11 +59,11 @@ const works = [
   },
 
  {
-    id: "ar15",
-    title: "리니지w 마법사 튜토리얼 npc",
+    id: "AR15",
+    title: "소녀전선 습작",
     role: "리깅 & 애니메이션",
-    tags: ["npc캐릭터"],
-    description: "리니지w외주 작업",
+    tags: ["플레이어 캐릭터"],
+    description: "습작",
     skeleton: "assets/ar15/AR15.json",
     atlas: "assets/ar15/AR15.atlas",
     animation: "idle",
