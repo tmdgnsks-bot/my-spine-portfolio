@@ -61,7 +61,7 @@ const works = [
     animation: "idle",
     backgroundColor: "#1a1a2eff",
     spineVersion: "4.3",
-    thumbnail: "assets/spineboy-demo/thumbnail.png",
+    thumbnail: "assets/nc1/thumbnail.png",
   },
 
   {
@@ -75,7 +75,7 @@ const works = [
     animation: "idle",
     backgroundColor: "#1a1a2eff",
     spineVersion: "4.3",
-    thumbnail: "assets/spineboy-demo/thumbnail.png",
+    thumbnail: "assets/ar15/thumbnail.png",
    },
 
 ];
