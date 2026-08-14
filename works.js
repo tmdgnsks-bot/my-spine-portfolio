@@ -44,18 +44,17 @@ const works = [
     spineVersion: "4.3",
   },
 
-  // 아래에 본인 작업물을 추가하세요. 예시:
-  //
-  // {
-  //   id: "Portrait_NPC_Mento_MA",
-  //   title: "리니지w 마법사 튜토리얼 npc",
-  //   role: "리깅 & 애니메이션",
-  //   tags: ["npc캐릭터"],
-  //   description: "리니지w외주 작업",
-  //   skeleton: "assets/nc1/Portrait_NPC_Mento_MA.json",
-  //   atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas",
-  //   animation: "idle",
-  //   backgroundColor: "#1a1a2eff",
-  //   spineVersion: "4.2",
-  // },
+ 
+  {
+    id: "Portrait_NPC_Mento_MA",
+    title: "리니지w 마법사 튜토리얼 npc",
+    role: "리깅 & 애니메이션",
+    tags: ["npc캐릭터"],
+    description: "리니지w외주 작업",
+     skeleton: "assets/nc1/Portrait_NPC_Mento_MA.json",
+    atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas",
+    animation: "idle",
+    backgroundColor: "#1a1a2eff",
+    spineVersion: "4.2",
+  },
 ];
