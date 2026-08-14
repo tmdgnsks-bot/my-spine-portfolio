@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>스파인 애니메이션 포트폴리오</title>
+<meta name="description" content="스파인(Spine) 2D 스켈레톤 애니메이션 작업물 포트폴리오. 클릭 한 번으로 실제 스켈레톤 뷰어에서 작업물을 확인할 수 있습니다." />
+
+<!-- 스파인 웹 플레이어 (공식 런타임, v4.3.13 로컬 포함). 버전은 작업물을 내보낸
+     스파인 에디터 버전과 맞춰야 합니다. README.md의 "버전 맞추기" 항목을 참고하세요.
+     CDN 버전을 대신 쓰고 싶다면 README의 안내를 참고해 주석을 바꿔주세요. -->
+<link rel="stylesheet" href="vendor/spine-player/spine-player.min.css" />
+<script src="vendor/spine-player/spine-player.min.js"></script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Spine 2D Animation Portfolio</div>
+    <!-- ▼ 이름/타이틀을 본인 것으로 바꿔주세요 -->
+    <h1>전승훈 — 스파인 애니메이터</h1>
+    <p class="lead">
+      게임용 2D 스켈레톤 애니메이션을 리깅하고 애니메이팅합니다.
+      아래 카드를 클릭하면 실제 스파인 웹 플레이어로 작업물을 직접 재생해볼 수 있습니다.
+    </p>
+    <div class="links">
+      <!-- ▼ 연락처/링크를 본인 것으로 바꿔주세요 -->
+      <a href="tmdgnsks@naver.com">이메일</a>
+      <a href="#">이력서(PDF)</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">ArtStation</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="section-title">작업물</p>
+    <div class="grid" id="grid"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Spine® is a trademark of Esoteric Software. Built with the official Spine Web Player.
+  </div>
+</footer>
+
+<!-- 뷰어 모달 -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="modal-title">제목</h2>
+        <p id="modal-desc">설명</p>
+      </div>
+      <button class="close" id="modal-close" aria-label="닫기">✕</button>
+    </div>
+    <div id="player-container"></div>
+    <div class="modal-footer">
+      <span id="modal-tags"></span>
+      <span id="modal-version"></span>
+    </div>
+  </div>
+</div>
+
+<script src="works.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
