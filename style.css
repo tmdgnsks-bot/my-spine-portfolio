@@ -166,6 +166,37 @@ main {
   background: rgba(0, 0, 0, 0.28);
 }
 
+/* 작업물 타입 배지 (스파인 / 이펙트) — 썸네일 좌측 상단에 표시 */
+.type-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: var(--text);
+  backdrop-filter: blur(4px);
+}
+
+.type-badge--spine {
+  background: rgba(124, 140, 255, 0.25);
+  border: 1px solid rgba(124, 140, 255, 0.6);
+}
+
+.type-badge--sprite {
+  background: rgba(255, 158, 100, 0.22);
+  border: 1px solid rgba(255, 158, 100, 0.6);
+}
+
+/* 스프라이트(GIF) 뷰어 모드: 스파인 웹 플레이어 대신 이미지를 가운데 정렬해서 보여줌 */
+#player-container.sprite-mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card .body {
   padding: 16px 18px 18px;
 }

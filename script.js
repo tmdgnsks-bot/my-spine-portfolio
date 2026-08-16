@@ -21,13 +21,20 @@ function renderGrid() {
 
   grid.innerHTML = "";
   works.forEach((work) => {
+    const type = work.type || "spine"; // "spine"(기본) 또는 "sprite"(GIF 이펙트 등)
     const card = document.createElement("div");
     card.className = "card";
-    const thumbImg = work.thumbnail
-      ? `<img src="${work.thumbnail}" alt="${escapeHtml(work.title)} 썸네일" loading="lazy" />`
+    const thumbSrc = work.thumbnail || (type === "sprite" ? work.media : null);
+    const thumbImg = thumbSrc
+      ? `<img src="${thumbSrc}" alt="${escapeHtml(work.title)} 썸네일" loading="lazy" />`
       : "";
+    const typeBadgeText = type === "sprite" ? "이펙트" : "스파인";
     card.innerHTML = `
-      <div class="thumb">${thumbImg}<div class="play-badge">▶</div></div>
+      <div class="thumb">
+        ${thumbImg}
+        <span class="type-badge type-badge--${escapeHtml(type)}">${typeBadgeText}</span>
+        <div class="play-badge">▶</div>
+      </div>
       <div class="body">
         <h3>${escapeHtml(work.title)}</h3>
         <p class="role">${escapeHtml(work.role || "")}</p>
@@ -42,10 +49,13 @@ function renderGrid() {
 }
 
 function openWork(work) {
+  const type = work.type || "spine";
+
   modalTitle.textContent = work.title;
   modalDesc.textContent = work.description || "";
   modalTags.textContent = (work.tags || []).join(" · ");
-  modalVersion.textContent = work.spineVersion ? `Spine ${work.spineVersion}` : "";
+  modalVersion.textContent =
+    type === "sprite" ? "스프라이트 GIF" : work.spineVersion ? `Spine ${work.spineVersion}` : "";
 
   overlay.classList.add("open");
   document.body.style.overflow = "hidden";
@@ -53,6 +63,14 @@ function openWork(work) {
   // 이전 플레이어가 있으면 정리 (WebGL 컨텍스트 누수 방지)
   disposePlayer();
 
+  if (type === "sprite") {
+    openSpriteViewer(work);
+  } else {
+    openSpineViewer(work);
+  }
+}
+
+function openSpineViewer(work) {
   currentPlayer = new spine.SpinePlayer("player-container", {
     skeleton: work.skeleton,
     atlas: work.atlas,
@@ -73,6 +91,21 @@ function openWork(work) {
   });
 }
 
+function openSpriteViewer(work) {
+  // 스파인이 아닌 GIF 등 프레임 시퀀스 이펙트를 그대로 크게 보여줌 (별도 재생 컨트롤 불필요, GIF가 자동 재생됨)
+  const container = document.getElementById("player-container");
+  const src = work.media || work.thumbnail;
+  container.style.background = work.backgroundColor || "#101018ff";
+  if (!src) {
+    container.innerHTML = `<div style="color:#ff8080;padding:24px;font-size:13px;">표시할 이미지(media 또는 thumbnail) 경로가 없습니다.</div>`;
+    return;
+  }
+  container.innerHTML = `<img src="${src}" alt="${escapeHtml(
+    work.title
+  )}" style="max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;" />`;
+  container.classList.add("sprite-mode");
+}
+
 function disposePlayer() {
   if (currentPlayer && typeof currentPlayer.dispose === "function") {
     try {
@@ -83,7 +116,11 @@ function disposePlayer() {
   }
   currentPlayer = null;
   const container = document.getElementById("player-container");
-  if (container) container.innerHTML = "";
+  if (container) {
+    container.innerHTML = "";
+    container.style.background = "";
+    container.classList.remove("sprite-mode");
+  }
 }
 
 function closeModal() {
