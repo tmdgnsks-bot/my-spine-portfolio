@@ -78,4 +78,16 @@ const works = [
     thumbnail: "assets/ar15/thumbnail.png",
    },
 
+
+  {
+    id: "effect-demo",
+    title: "버스트 이펙트 (데모)",
+    role: "샘플 작업물 — 직접 그린 GIF 이펙트 예시입니다",
+    tags: ["이펙트", "GIF", "데모"],
+    description:
+      "스파인이 아닌, 프레임을 직접 그려서 만든 GIF 이펙트를 올릴 때의 예시입니다. type을 'sprite'로 설정하면 됩니다.",
+    type: "sprite",
+    media: "assets/effect-demo/burst.gif",
+    backgroundColor: "#101018ff",
+  },
 ];
