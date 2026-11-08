@@ -31,9 +31,9 @@ const works = [
     role: "캐릭터 애니메이션",
     tags: ["늑대", "몬스터", "캐릭터"],
     description:
-      "늑대 몬스터의 대기, 걷기, 점프, 공격, 피격 모션을 담은 Spine 애니메이션 작업입니다.",
+      "늑대 몬스터의 대기, 걷기, 공격, 피격 모션을 담은 Spine 애니메이션 작업입니다.",
     type: "spine",
-    skeleton: "assets/wolf-monster/30600_wolf_c_warrior.json",
+    skeleton: "assets/wolf-monster/30600_wolf_c_warrior_v2.json",
     atlas: "assets/wolf-monster/30600_wolf_c_warrior.atlas",
     animation: "idle",
     spineVersion: "4.3",
