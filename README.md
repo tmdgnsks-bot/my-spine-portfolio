@@ -1,165 +1,141 @@
-# 스파인(Spine) 애니메이션 포트폴리오
+# 전승훈 — Made to move.
 
-채용 담당자가 링크 하나만 클릭하면, 실제 스파인 웹 플레이어(공식 스켈레톤 뷰어)로
-작업물의 애니메이션·스킨을 직접 재생해볼 수 있는 포트폴리오 갤러리 페이지입니다.
+밝은 종이색 배경, 큰 타이포그래피, 실시간 캐릭터 무대를 중심으로 새로 만든 Spine 포트폴리오입니다.
 
-- 프레임워크/빌드 도구 없음 (순수 HTML/CSS/JS) — 어디에나 올리기 쉬움
-- 뷰어는 Esoteric Software의 공식 [Spine Web Player](https://en.esotericsoftware.com/spine-player) 사용
-- 카드를 클릭하면 모달 창에서 애니메이션/스킨 선택, 재생/일시정지 등 기본 컨트롤 제공
-- 스파인 작업물뿐 아니라, 직접 그린 GIF 이펙트 같은 스프라이트 작업물도 같은 갤러리에
-  섞어서 올릴 수 있음 (카드에 "스파인" / "이펙트" 배지로 구분됨)
+**사이트:** https://tmdgnsks-bot.github.io/my-spine-portfolio/
 
-## 폴더 구조
+## 구성
 
-```
-spine-portfolio/
-├── index.html        ← 페이지 뼈대, 이름/소개/연락처 이 안에서 수정
-├── style.css          ← 디자인 (색상 등은 :root 변수에서 한 번에 수정 가능)
-├── script.js           ← 갤러리 렌더링 + 뷰어 모달 로직 (보통 수정할 필요 없음)
-├── works.js            ← ★ 작업물 목록. 새 작업물은 여기에 추가
-└── assets/
-    └── spineboy-demo/  ← 샘플 데모 (본인 작업물로 교체/추가)
-```
+- 첫 화면에서 대표 Spine 캐릭터 실시간 재생, 작품 전환, 재생/일시정지
+- 실제 작업 / 샘플을 나눈 갤러리, 형식 필터, 제목·설명·태그 검색
+- Spine 4.3 JSON·binary, GIF·이미지, MP4·WebM, YouTube·Vimeo 임베드
+- 상세 뷰어: 애니메이션·속도 선택, 공식 플레이어의 스킨/재생 컨트롤, 배경 변경, 전체 화면
+- 키보드 접근: 카드 버튼, 모달 포커스 제한, Escape 닫기, 좌우 화살표 작품 전환
+- 화면 밖 대표 애니메이션 일시정지, 순차 썸네일 캡처 후 WebGL 리소스 정리
+- 모바일 화면, 동작 줄이기 설정 지원
 
-## 1. 로컬에서 미리보기
+프레임워크나 빌드 없이 HTML/CSS/JavaScript로 동작합니다. Google Fonts를 불러오지 못하면 시스템 글꼴을 사용합니다. Spine 런타임은 기존 저장소에 포함된 공식 **4.3.13** 파일을 그대로 사용합니다. 작업물 파일도 보존했습니다.
 
-`index.html`을 더블클릭해서 바로 열면 브라우저 보안 정책(CORS) 때문에
-스파인 파일을 못 불러올 수 있습니다. 반드시 로컬 서버로 열어주세요.
+## 파일 구조
 
-```bash
-cd spine-portfolio
-python3 -m http.server 8000
-# 브라우저에서 http://localhost:8000 접속
+```text
+index.html          이름, 소개, 이메일, 페이지 구조
+style.css           전체 디자인과 반응형 스타일
+script.js           갤러리·실시간 무대·상세 뷰어
+works.js            작품 목록 — 새 작업은 이 파일에 추가
+assets/             작품별 JSON, atlas, PNG, GIF, 영상
+assets/site/        파비콘
+vendor/spine-player/ 공식 Spine 4.3 런타임과 스타일
 ```
 
-(또는 VS Code의 "Live Server" 확장을 사용해도 됩니다.)
+## 작품 추가하기
 
-## 2. 본인 작업물 추가하기
+1. GitHub 저장소의 `assets/작품폴더/` 아래 파일을 올립니다.
+2. `works.js`를 편집해서 `works` 배열 안에 항목을 추가합니다. 객체 사이의 쉼표를 확인하세요.
+3. `main`에 커밋합니다. 기존 GitHub Pages 설정(`main` / root)이 자동으로 배포합니다.
 
-1. **스파인 에디터에서 내보내기(Export)**
-   - `Export` 창에서 Format을 `Json`(텍스트) 또는 `Binary`(.skel, 용량 작음)로 선택
-   - 텍스처 아틀라스(`.atlas` + `.png`)도 함께 팩(pack)해서 내보내기
-2. `assets/작업물이름/` 폴더를 새로 만들고 내보낸 파일들(json/skel, atlas, png)을 넣기
-3. `works.js` 파일 맨 아래 예시 주석을 참고해서 `works` 배열에 항목 추가
-   (제목, 역할, 태그, 설명, 파일 경로, 시작 애니메이션 이름 등)
-4. 데모용 `spineboy-demo` 항목은 지워도 되고 그대로 둬도 됩니다.
+사이트 방문자가 파일을 업로드하는 기능은 없습니다. GitHub 저장소를 통해 작품을 관리합니다. 공개 사이트에 넣는 파일은 누구나 내려받을 수 있습니다.
 
-> ⚠️ 예시를 복사해서 붙여넣을 때는 앞의 `//` 주석 기호를 꼭 지워주세요.
-> `//`가 남아있으면 자바스크립트가 텍스트로만 취급해서 카드가 아예 안 뜹니다.
+### Spine 4.3
 
-> ⚠️ 유니티에서도 같이 쓰는 아틀라스라면 `.atlas.txt`처럼 확장자에 `.txt`가
-> 붙어있을 수 있어요. 웹 플레이어는 정확히 `.atlas` 확장자만 인식하므로,
-> 포트폴리오용 폴더에는 `.txt`가 안 붙은 원본 `.atlas` 파일을 넣어야 합니다.
+```js
+{
+  id: "my-character",                       // 작품마다 다른 값
+  title: "캐릭터 이름",
+  subtitle: "A story in motion.",            // 선택: 카드의 짧은 보조 문구
+  role: "리깅 & 애니메이션",
+  tags: ["캐릭터", "액션"],
+  description: "작업 내용과 담당 역할을 설명해 주세요.",
+  type: "spine",
+  skeleton: "assets/my-character/character.json", // .skel도 가능
+  atlas: "assets/my-character/character.atlas",
+  animation: "idle",                        // 실제 클립 이름; 생략 가능
+  spineVersion: "4.3",
+  backgroundColor: "#28342b",               // 카드 배경
+  // thumbnail: "assets/my-character/cover.webp", // 선택: 로딩 중 표시
+  // skin: "default",                       // 선택: 기본 스킨
+  // hideAnimations: ["slider-helper"],      // 선택: 메뉴에서 숨길 클립
+  // premultipliedAlpha: true,               // 내보내기와 맞추기; 기본 true
+  featured: true,                           // 첫 화면 대표 작품에 포함
+},
+```
 
-## 3. 스파인이 아닌 작업물(직접 그린 GIF 이펙트 등) 추가하기
+- JSON 또는 binary, atlas, atlas에서 참조하는 **모든 PNG 텍스처**가 필요합니다. 기본적으로 같은 폴더에 두세요.
+- atlas 안의 이미지 파일명과 실제 이름을 대소문자까지 맞추세요. 경로는 index.html 기준 상대 경로를 권장합니다.
+- 에디터와 런타임의 major.minor를 **4.3**으로 맞추세요. 예시 데이터도 공식 런타임으로 파싱해 확인했습니다.
+- 썸네일은 화면에 들어올 때 실제 캐릭터를 한 번 렌더링해 캡처합니다. 캡처 이후 임시 플레이어는 정리합니다. 썸네일 캡처가 안 되면 지정한 thumbnail 또는 기본 표시를 사용합니다.
+- `hideAnimations` 및 4.3 슬라이더 참조 클립은 선택 메뉴에서 숨깁니다. 클립 데이터는 유지하므로 슬라이더 동작은 보존됩니다.
+- `.atlas.txt`도 URL로 명시하면 사용할 수 있습니다. 확장자보다 실제 파일 내용과 참조 경로가 중요합니다.
+- WebGL 지원과 JavaScript가 필요합니다. 파일 경로, 버전, 텍스처 불일치 시 뷰어에 오류 안내를 표시합니다.
 
-스파인 스켈레톤이 아니라 프레임을 직접 그려서 만든 GIF 이펙트, 스프라이트
-시퀀스 같은 작업물도 같은 갤러리에 섞어서 올릴 수 있습니다. 이 경우 스파인
-웹 플레이어 대신 이미지를 그대로 크게 보여주는 모드로 동작해요.
+### GIF 또는 이미지
 
-1. `assets/작업물이름/` 폴더에 완성된 `.gif` 파일 넣기
-2. `works.js`에 항목 추가할 때 `skeleton`/`atlas`/`animation`/`spineVersion`
-   대신 아래 두 필드를 사용:
-   ```js
-   type: "sprite",
-   media: "assets/작업물이름/파일이름.gif",
-   ```
-3. 카드에는 "이펙트" 배지가 자동으로 붙어서 스파인 작업물과 구분됩니다.
+```js
+{
+  id: "effect",
+  title: "이펙트 작업",
+  role: "이펙트 애니메이션",
+  tags: ["GIF", "이펙트"],
+  description: "작업 설명",
+  type: "gif",                             // 정적 이미지는 "image"
+  media: "assets/effect/effect.gif",        // PNG, JPG, WebP 등도 가능
+  backgroundColor: "#22232b",
+},
+```
 
-`effect-demo` 항목이 실제로 작동하는 예시이니 `works.js`와
-`assets/effect-demo/burst.gif`를 참고하세요.
+GIF는 브라우저 기본 이미지 재생으로 보여주며 별도의 일시정지·타임라인 기능은 없습니다. 기존 `type: "sprite"` 항목도 이미지 모드로 호환됩니다.
 
-## 4. 카드에 미리보기 썸네일 넣기 (권장)
-
-기본 상태에서는 클릭하기 전까지 카드에 재생 버튼 아이콘만 보이고 작업물이
-뭔지 안 보입니다. `works.js`의 각 항목에 `thumbnail` 필드를 추가하면
-클릭 전에도 미리보기 이미지가 표시돼서 채용 담당자가 카드를 눌러볼 확률이
-올라갑니다.
-
-1. 미리보기용 이미지를 준비 (둘 중 하나)
-   - **정적 이미지**: 스파인 에디터에서 캡처하거나, 웹 플레이어를 실행해서
-     원하는 포즈에서 브라우저 스크린샷을 찍어 `.png`/`.jpg`로 저장
-   - **움직이는 미리보기**: 짧은 `.gif`로 만들면 브라우저에서 자동 재생됩니다
-     (별도 코드 필요 없음)
-2. 그 이미지를 해당 작업물의 `assets/작업물이름/` 폴더 안에 넣기
-   (예: `assets/dragon-boss/thumbnail.png`)
-3. `works.js`의 해당 항목에 `thumbnail: "assets/dragon-boss/thumbnail.png",` 한 줄 추가
-4. 권장 비율은 4:3이며, 용량은 1MB 이하를 추천 (로딩 속도 때문)
-
-데모(`spineboy-demo`) 항목에는 예시로 실제 썸네일 이미지가 이미 적용되어 있으니
-`works.js`와 `assets/spineboy-demo/thumbnail.png`를 참고하세요.
-
-## 5. ⚠️ 버전 맞추기 (중요)
-
-스파인 웹 플레이어는 **내보낸 스파인 에디터 버전과 플레이어 런타임 버전이
-일치해야** 정상 작동합니다. 버전이 다르면 뷰어에서 에러가 납니다.
-
-이 템플릿은 기본적으로 `vendor/spine-player/` 폴더에 **Spine 4.3.13 버전 런타임을
-로컬 파일로 포함**하고 있습니다 (외부 CDN 접속이 막힌 회사 네트워크에서도 항상 동작하도록).
-데모 작업물(Spineboy)도 4.3 버전으로 내보낸 파일로 맞춰뒀습니다.
-본인 작업물의 스파인 버전이 다르다면 아래처럼 교체하세요.
-
-1. 내보낸 `.json` 파일을 텍스트 에디터로 열어 맨 위쪽
-   `"skeleton": { "spine": "4.3.xx", ... }` 부분에서 실제 버전 확인
-2. 버전이 다르면 로컬 파일을 새 버전으로 교체:
-   ```bash
-   npm pack @esotericsoftware/spine-player@4.2   # 원하는 버전으로 교체 (예: 4.2, 4.1 등)
-   tar xzf esotericsoftware-spine-player-*.tgz
-   cp package/dist/iife/spine-player.min.js vendor/spine-player/
-   cp package/dist/spine-player.min.css      vendor/spine-player/
-   ```
-3. (선택) 로컬 파일 대신 CDN을 쓰고 싶다면 `index.html`의 두 줄을 아래로 교체:
-   ```html
-   <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.3/dist/spine-player.css" />
-   <script src="https://unpkg.com/@esotericsoftware/spine-player@4.3/dist/iife/spine-player.js"></script>
-   ```
-
-여러 버전으로 작업한 작업물을 함께 보여주고 싶다면, 가장 나중 버전 하나로
-통일해서 다시 내보내는 것을 추천합니다 (플레이어는 한 페이지에 한 버전만 로드).
-
-## 6. GitHub Pages로 배포해서 링크 공유하기
-
-1. [github.com](https://github.com)에서 새 저장소(Repository) 생성 (Public)
-2. 이 폴더를 그 저장소에 푸시:
-   ```bash
-   cd spine-portfolio
-   git init
-   git add .
-   git commit -m "스파인 포트폴리오 페이지"
-   git branch -M main
-   git remote add origin https://github.com/사용자명/저장소명.git
-   git push -u origin main
-   ```
-3. 저장소 페이지에서 **Settings → Pages** 이동
-4. **Source**를 `Deploy from a branch`로, **Branch**를 `main` / `(root)`로 설정 후 저장
-5. 1~2분 후 `https://사용자명.github.io/저장소명/` 형태의 링크가 생성됨
-6. 이 링크를 채용 담당자에게 전달하면 됩니다 (설치 없이 브라우저에서 바로 확인 가능)
-
-> 파일 용량이 큰 텍스처가 많다면 GitHub 저장소 용량 제한(1GB 권장)을 참고해서
-> 텍스처 해상도를 조절하거나 필요한 작업물만 선별해서 올리는 것을 추천합니다.
-
-## 7. 커스터마이징
-
-- 이름/한줄소개/연락처: `index.html`의 `<header class="hero">` 안쪽
-- 색상 테마: `style.css` 최상단 `:root { ... }` 변수
-- 카드 그리드 열 개수: `style.css`의 `.grid { grid-template-columns: ... }`
-
-
-## 동영상 추가
-
-`assets/showreel/`에 MP4 또는 WebM 파일과 미리보기 이미지를 넣고 `works.js` 배열에 아래 항목을 추가합니다. 실제 파일 경로로 변경하세요.
+### 동영상
 
 ```js
 {
   id: "showreel",
   title: "애니메이션 쇼릴",
   role: "리깅 & 애니메이션",
-  tags: ["쇼릴", "영상"],
-  description: "담당 역할과 작업 내용을 적어주세요.",
+  tags: ["쇼릴"],
+  description: "담당한 부분과 작업 내용을 적어주세요.",
   type: "video",
-  media: "assets/showreel/showreel.mp4",
+  media: "assets/showreel/showreel.mp4",      // 또는 .webm
   thumbnail: "assets/showreel/cover.webp",
 },
 ```
 
-PNG/JPG/WebP 등 이미지는 GIF와 동일하게 `type: "sprite"`로 표시할 수 있습니다. 이 사이트는 GitHub에 파일을 올리고 `works.js`를 수정하는 방식이며 방문자용 업로드 기능은 없습니다. 대용량 영상은 외부 호스팅을 사용하는 것이 좋습니다.
+영상은 자동으로 소리를 내지 않으며 방문자가 재생 버튼을 누릅니다. 브라우저별 코덱 지원을 확인하세요. MP4/H.264가 일반적으로 호환성이 좋습니다. GitHub의 단일 파일 100 MiB 제한과 Pages의 사이트 용량·대역폭 제한을 고려해 큰 영상은 외부 호스팅을 권장합니다. Git LFS를 Pages 미디어 배포 용도로 사용하지 마세요.
+
+YouTube/Vimeo는 media 대신 HTTPS **임베드 주소**를 넣습니다.
+
+```js
+type: "video",
+embedUrl: "https://www.youtube-nocookie.com/embed/영상ID",
+// 또는 https://www.youtube.com/embed/영상ID
+// 또는 https://player.vimeo.com/video/영상ID
+```
+
+### 샘플 구분
+
+`sample: true`인 항목은 **샘플 탭에서만** 보이며 개인 작업 목록과 구분합니다. 기본 제공 Spineboy는 Esoteric Software 공식 예제이고, burst GIF는 기존 템플릿의 샘플입니다. 개인 작업에는 sample을 생략하거나 false로 두세요.
+
+현재 Video와 GIF · Image 탭에 실제 작업이 없는 것은 정상입니다. 해당 형식의 작품을 추가하면 자동으로 표시됩니다.
+
+## 소개와 디자인 수정
+
+- `index.html`: 이름, 소개글, 이메일. 이메일 링크는 `mailto:주소` 형식을 사용합니다.
+- `style.css`의 `:root`: 종이색 `--paper`, 글자색 `--ink`, 포인트색 `--acid`.
+- `works.js`: 작품 제목·설명·태그·파일 경로. 헤더의 Work 개수는 자동으로 갱신합니다.
+- 파일 교체 직후 캐시가 남아 있으면 새로고침하세요. JS/CSS URL 뒤의 버전 값도 바꿀 수 있습니다.
+
+## 로컬 미리보기
+
+이 폴더에서 아래 명령을 실행합니다.
+
+```sh
+python3 -m http.server 8000
+```
+
+브라우저에서 http://localhost:8000 을 여세요. file://로 직접 열면 Spine 데이터 요청이 차단될 수 있습니다.
+
+## 라이선스와 검증
+
+Spine®은 Esoteric Software의 상표입니다. 런타임과 공식 샘플은 해당 원저작자의 라이선스를 따릅니다. https://esotericsoftware.com/spine-runtimes-license
+
+검증: JavaScript 구문, 데이터 경로, atlas 텍스처 참조, 실제 4.3 런타임의 JSON 파싱, DOM 상호작용을 확인했습니다. 이 작업 환경에는 공유 Chrome 제어 도구가 없어 실제 WebGL 렌더링과 화면별 시각 검증은 수행하지 못했습니다. 실제 기기에서 확인할 수 있도록 GitHub Pages 배포 상태와 공개 파일 응답을 확인합니다.

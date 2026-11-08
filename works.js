@@ -1,105 +1,92 @@
-/**
- * ============================================================
- *  작업물(작품) 목록 — 여기에 본인의 스파인 작업물을 추가하세요.
- * ============================================================
- *
- * 1) assets/ 폴더 아래에 작업물별로 폴더를 하나씩 만드세요.
- *    예: assets/dragon-boss/dragon.json, dragon.atlas, dragon.png
- *
- * 2) 스파인 에디터에서 Export 할 때:
- *    - Format: Json (텍스트, 용량 크지만 디버깅 쉬움) 또는 Binary(.skel, 용량 작음)
- *    - Atlas 텍스처를 함께 내보내기 (Pack 체크)
- *    - "Nonessential data 포함" 여부는 취향껏 (포함 시 용량 증가)
- *
- * 3) 아래 works 배열에 항목을 하나 추가하세요. 필드 설명:
- *    id          : 고유 식별자 (영문/숫자, 공백 없이)
- *    title       : 카드에 표시될 작업물 이름
- *    role        : 담당 역할 (예: "리깅 & 애니메이션", "이펙트")
- *    tags        : 검색/필터용 태그 배열
- *    description : 작업물 설명 (짧게)
- *    skeleton    : json 또는 skel 파일 경로
- *    atlas       : atlas 파일 경로
- *    animation   : 처음 재생할 애니메이션 이름 (스파인 에디터에서 확인)
- *    skin        : (선택) 기본으로 보여줄 스킨 이름
- *    backgroundColor : 뷰어 배경색 (16진수 RGBA, 예: "#1a1a2eff")
- *    spineVersion : 이 작업물을 내보낸 스파인 에디터 버전 (예: "4.2"). 참고용 표시.
- *    thumbnail   : (선택) 카드에 보여줄 미리보기 이미지 경로. 클릭하기 전에도
- *                  작업물이 뭔지 보이게 해줌. 없으면 기본 플레이스홀더로 표시됨.
- *                  - 정적 이미지: .png/.jpg (스파인 에디터에서 캡처하거나 스크린샷)
- *                  - 움직이는 미리보기: .gif (브라우저에서 자동 재생됨, 별도 코드 불필요)
- *                  - 권장 비율 4:3, 너무 큰 용량은 로딩이 느려지니 1MB 이하 권장
- *
- * 팁: 스파인 버전은 내보낸 json 파일을 열어 최상단
- *     "skeleton": { "spine": "4.2.33", ... } 부분에서 확인할 수 있습니다.
+/*
+ * 내 작업물 목록. assets 폴더에 파일을 올린 뒤 아래 배열에 항목을 추가하세요.
+ * type: "spine" | "image" | "gif" | "video" (기존 "sprite"도 지원)
+ * Spine: skeleton + atlas + atlas가 참조하는 PNG 파일이 필요합니다. 버전은 4.3.
+ * 이미지/GIF/영상: media에 파일 경로를 입력하세요. 영상 썸네일은 thumbnail.
+ * sample: true인 항목은 개인 작업과 구분하여 샘플 탭에만 표시합니다.
+ * featured: true인 Spine 작업은 첫 화면의 실시간 무대에 표시합니다.
+ * 전체 예시는 README.md에 있습니다.
  */
-
 const works = [
   {
-    id: "spineboy-demo",
-    title: "Spineboy (데모)",
-    role: "샘플 작업물 — 이 카드는 예시입니다",
-    tags: ["데모", "액션", "리깅"],
+    id: "lineage-w-mage",
+    title: "리니지W · 마법사 NPC",
+    subtitle: "A quiet moment of magic.",
+    role: "리깅 & 애니메이션",
+    tags: ["NPC", "캐릭터", "리깅"],
     description:
-      "실제 작업물을 추가하기 전 보여주는 샘플입니다. Esoteric Software에서 제공하는 공식 예제 캐릭터로, 본인의 작업물로 교체해서 사용하세요.",
+      "리니지W 외주 작업. 마법사 튜토리얼 NPC의 리깅과 애니메이션을 담당했습니다.",
+    type: "spine",
+    skeleton: "assets/nc1/Portrait_NPC_Mento_MA.json",
+    atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    thumbnail: "assets/nc1/thumbnail.png",
+    backgroundColor: "#202923",
+    featured: true,
+  },
+  {
+    id: "ar15-study",
+    title: "소녀전선 · 캐릭터 스터디",
+    subtitle: "Small character, big personality.",
+    role: "리깅 & 애니메이션",
+    tags: ["개인 습작", "SD 캐릭터", "액션"],
+    description:
+      "소녀전선 캐릭터를 활용한 개인 습작입니다. 대기, 이동, 공격 등 다양한 게임 모션을 살펴볼 수 있습니다.",
+    type: "spine",
+    skeleton: "assets/ar15/AR15.json",
+    atlas: "assets/ar15/AR15.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    thumbnail: "assets/ar15/thumbnail.png",
+    backgroundColor: "#322c37",
+    featured: true,
+  },
+  {
+    id: "hk419-motion",
+    title: "HK419 · 액션 스터디",
+    subtitle: "Finding rhythm in every action.",
+    role: "리깅 & 애니메이션",
+    tags: ["개인 습작", "게임 모션", "액션"],
+    description:
+      "달리기, 걷기, 점프와 스킬 동작을 담은 개인 습작입니다. 애니메이션 메뉴에서 각 클립을 선택해 확인할 수 있습니다.",
+    type: "spine",
+    skeleton: "assets/11/HK419_SD.json",
+    atlas: "assets/11/HK419_SD.atlas",
+    animation: "run",
+    hideAnimations: ["LR", "up_down"],
+    spineVersion: "4.3",
+    backgroundColor: "#29343d",
+    featured: true,
+  },
+  {
+    id: "burst-sample",
+    title: "Burst · GIF 샘플",
+    subtitle: "A little burst of energy.",
+    role: "GIF 뷰어 샘플",
+    tags: ["GIF", "이펙트", "샘플"],
+    description:
+      "GIF 형식의 재생을 보여주는 예시입니다. 개인 포트폴리오 작업이 아닌 기존 템플릿의 샘플 파일입니다.",
+    type: "gif",
+    media: "assets/effect-demo/burst.gif",
+    backgroundColor: "#22232b",
+    sample: true,
+  },
+  {
+    id: "spineboy-sample",
+    title: "Spineboy · 공식 샘플",
+    subtitle: "Explore the Spine player.",
+    role: "Esoteric Software 공식 예제",
+    tags: ["Spine 4.3", "공식 예제", "샘플"],
+    description:
+      "Esoteric Software의 공식 예제 캐릭터입니다. 개인 작업이 아닌 Spine 뷰어 기능 확인용 샘플입니다.",
+    type: "spine",
     skeleton: "assets/spineboy-demo/spineboy-pro.json",
     atlas: "assets/spineboy-demo/spineboy-pma.atlas",
     animation: "walk",
     skin: "default",
-    backgroundColor: "#14141fff",
     spineVersion: "4.3",
-  },
-
-  {
-    id: "Portrait_NPC_Mento_MA",
-    title: "리니지w 마법사 튜토리얼 npc",
-    role: "리깅 & 애니메이션",
-    tags: ["npc캐릭터"],
-    description: "리니지w외주 작업",
-    skeleton: "assets/nc1/Portrait_NPC_Mento_MA.json",
-    atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas",
-    animation: "idle",
-    backgroundColor: "#1a1a2eff",
-    spineVersion: "4.3",
-    thumbnail: "assets/nc1/thumbnail.png",
-  },
-
-  {
-    id: "AR15",
-    title: "소녀전선 습작",
-    role: "리깅 & 애니메이션",
-    tags: ["플레이어 캐릭터"],
-    description: "습작",
-    skeleton: "assets/ar15/AR15.json",
-    atlas: "assets/ar15/AR15.atlas",
-    animation: "idle",
-    backgroundColor: "#1a1a2eff",
-    spineVersion: "4.3",
-    thumbnail: "assets/ar15/thumbnail.png",
-   },
-
-  {
-    id: "11",
-    title: "11",
-    role: "11션",
-    tags: ["플레이어 캐릭터"],
-    description: "습작",
-    skeleton: "assets/11/HK419_SD.json",
-    atlas: "assets/11/HK419_SD.atlas",
-    animation: "run",
-    backgroundColor: "#1a1a2eff",
-    spineVersion: "4.3",
-    thumbnail: "assets/11/thumbnail.png",
-   },
-
-  {
-    id: "effect-demo",
-    title: "버스트 이펙트 (데모)",
-    role: "샘플 작업물 — 직접 그린 GIF 이펙트 예시입니다",
-    tags: ["이펙트", "GIF", "데모"],
-    description:
-      "스파인이 아닌, 프레임을 직접 그려서 만든 GIF 이펙트를 올릴 때의 예시입니다. type을 'sprite'로 설정하면 됩니다.",
-    type: "sprite",
-    media: "assets/effect-demo/burst.gif",
-    backgroundColor: "#101018ff",
+    backgroundColor: "#303032",
+    sample: true,
   },
 ];

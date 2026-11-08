@@ -1,72 +1,371 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>스파인 애니메이션 포트폴리오</title>
-<meta name="description" content="스파인(Spine) 2D 스켈레톤 애니메이션 작업물 포트폴리오. 클릭 한 번으로 실제 스켈레톤 뷰어에서 작업물을 확인할 수 있습니다." />
-
-<!-- 스파인 웹 플레이어 (공식 런타임, v4.3.13 로컬 포함). 버전은 작업물을 내보낸
-     스파인 에디터 버전과 맞춰야 합니다. README.md의 "버전 맞추기" 항목을 참고하세요.
-     CDN 버전을 대신 쓰고 싶다면 README의 안내를 참고해 주석을 바꿔주세요. -->
-<link rel="stylesheet" href="vendor/spine-player/spine-player.min.css" />
-<script src="vendor/spine-player/spine-player.min.js"></script>
-
-<link rel="stylesheet" href="style.css" />
-</head>
-<body>
-
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Spine 2D Animation Portfolio</div>
-    <!-- ▼ 이름/타이틀을 본인 것으로 바꿔주세요 -->
-    <h1>전승훈 — 스파인 애니메이터</h1>
-    <p class="lead">
-      게임용 2D 스켈레톤 애니메이션을 리깅하고 애니메이팅합니다.
-      아래 카드를 클릭하면 실제 스파인 웹 플레이어로 작업물을 직접 재생해볼 수 있습니다.
-    </p>
-    <div class="links">
-      <!-- ▼ 연락처/링크를 본인 것으로 바꿔주세요 -->
-      <a href="mailto:tmdgnsks@naver.com">이메일</a>
-      <a href="#">이력서(PDF)</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">ArtStation</a>
-    </div>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-    <p class="section-title">작업물</p>
-    <div class="grid" id="grid"></div>
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    Spine® is a trademark of Esoteric Software. Built with the official Spine Web Player.
-  </div>
-</footer>
-
-<!-- 뷰어 모달 -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal">
-    <div class="modal-header">
-      <div>
-        <h2 id="modal-title">제목</h2>
-        <p id="modal-desc">설명</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f3ed" />
+    <meta
+      name="description"
+      content="전승훈의 2D 애니메이션 포트폴리오. Spine 캐릭터의 움직임과 리깅, GIF, 영상을 직접 만나보세요."
+    />
+    <title>전승훈 — Made to move. / Spine Portfolio</title>
+    <link rel="icon" href="assets/site/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="vendor/spine-player/spine-player.min.css" />
+    <link rel="stylesheet" href="style.css?v=20261108" />
+    <script defer src="vendor/spine-player/spine-player.min.js"></script>
+    <script defer src="works.js?v=20261108"></script>
+    <script defer src="script.js?v=20261108"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#work">작업물로 바로 가기</a>
+    <header class="site-header shell">
+      <a href="#top" class="wordmark" aria-label="전승훈 포트폴리오 처음으로"
+        >sh<span class="logo-dot">.</span
+        ><span class="wordmark-label">SEUNGHUN<br />JEON</span></a
+      >
+      <nav aria-label="주 메뉴">
+        <a href="#work">Work <span id="nav-work-count">03</span></a
+        ><a href="#about">About</a
+        ><a href="#contact">Contact <span>↗</span></a>
+      </nav>
+      <span class="header-caption">2D ANIMATION PORTFOLIO</span>
+    </header>
+    <main id="top">
+      <section class="hero shell" aria-labelledby="hero-heading">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="tiny-cross">✳</span> EVERY CHARACTER HAS A STORY
+          </p>
+          <h1 id="hero-heading">
+            MADE<br />TO <span>MOVE<span class="heading-dot">.</span></span>
+          </h1>
+          <div class="hero-intro">
+            <span class="short-line"></span>
+            <p>
+              멈춘 그림에, 다음 장면을.<br /><span
+                >캐릭터에 생명을 더하는 2D 애니메이터 전승훈입니다.</span
+              >
+            </p>
+          </div>
+          <a class="primary-link" href="#work"
+            >작업물 살펴보기 <span>↘</span></a
+          >
+          <div class="hero-footnote">
+            <span>RIGGING</span><span>ANIMATION</span><span>SPINE 4.3</span>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-stage" id="hero-stage">
+            <span class="stage-cross stage-cross--tl" aria-hidden="true">+</span
+            ><span class="stage-cross stage-cross--br" aria-hidden="true"
+              >+</span
+            >
+            <div class="stage-topline">
+              <span class="live-label" id="hero-status"
+                ><i></i> LIVE PREVIEW</span
+              ><span class="stage-format">SPINE / 4.3</span>
+            </div>
+            <span class="stage-watermark" aria-hidden="true" id="hero-watermark"
+              >01</span
+            >
+            <img
+              id="hero-poster"
+              src="assets/nc1/thumbnail.png"
+              alt="리니지W 마법사 캐릭터 미리보기"
+              class="hero-poster"
+            />
+            <div
+              id="hero-player"
+              class="hero-player"
+              aria-label="선택한 캐릭터의 실시간 애니메이션"
+            ></div>
+            <p class="hero-error" id="hero-error" role="status" hidden></p>
+            <div class="stage-bottomline">
+              <span>CHARACTER IN MOTION</span
+              ><button
+                id="hero-pause"
+                class="stage-icon"
+                aria-label="미리보기 일시정지"
+                disabled
+              >
+                Ⅱ
+              </button>
+            </div>
+          </div>
+          <div class="feature-caption">
+            <div>
+              <span class="label" id="hero-category">CHARACTER ANIMATION</span>
+              <h2 id="hero-title">리니지W · 마법사 NPC</h2>
+            </div>
+            <button
+              class="circle-arrow"
+              id="hero-open"
+              aria-label="선택한 작품 자세히 보기"
+            >
+              ↗
+            </button>
+          </div>
+          <div class="feature-navigation">
+            <div
+              id="hero-dots"
+              class="hero-dots"
+              role="group"
+              aria-label="대표 작품 선택"
+            ></div>
+            <span class="feature-hint">움직임을 직접 만나보세요</span>
+            <div>
+              <button id="hero-prev" aria-label="이전 대표 작품">←</button
+              ><button id="hero-next" aria-label="다음 대표 작품">→</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="discipline-strip" aria-label="작업 분야">
+        <div class="shell">
+          <span>CHARACTER RIGGING</span><b>✳</b><span>2D ANIMATION</span
+          ><b>✳</b><span>GAME MOTION</span><b>✳</b><span>FRAME BY FRAME</span
+          ><b>✳</b>
+        </div>
       </div>
-      <button class="close" id="modal-close" aria-label="닫기">✕</button>
-    </div>
-    <div id="player-container"></div>
-    <div class="modal-footer">
-      <span id="modal-tags"></span>
-      <span id="modal-version"></span>
-    </div>
-  </div>
-</div>
-
-<script src="works.js"></script>
-<script src="script.js"></script>
-</body>
+      <section
+        class="work-section shell"
+        id="work"
+        aria-labelledby="work-heading"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / SELECTED WORK</p>
+            <h2 id="work-heading">
+              움직임의 기록<span class="accent-dot">.</span>
+            </h2>
+          </div>
+          <p>
+            작품을 클릭해 애니메이션을 재생해 보세요.<br /><span
+              >작은 표정부터, 캐릭터의 큰 액션까지.</span
+            >
+          </p>
+        </div>
+        <div class="work-toolbar">
+          <div class="filter-tabs" role="group" aria-label="작품 형식 필터">
+            <button class="is-active" data-filter="all" aria-pressed="true">
+              전체 <span id="work-total">3</span></button
+            ><button data-filter="spine" aria-pressed="false">Spine</button
+            ><button data-filter="image" aria-pressed="false">
+              GIF · Image</button
+            ><button data-filter="video" aria-pressed="false">Video</button
+            ><button data-filter="sample" aria-pressed="false">
+              샘플 <span>↗</span>
+            </button>
+          </div>
+          <label class="search-field"
+            ><svg
+              aria-hidden="true"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m16 16 5 5" /></svg
+            ><input
+              id="work-search"
+              type="search"
+              placeholder="작업물 검색"
+              aria-label="작업물 검색"
+          /></label>
+        </div>
+        <p class="sample-notice" id="sample-notice" hidden>
+          샘플은 뷰어 기능을 보여주는 예시이며, 개인 포트폴리오 작업과
+          구분됩니다.
+        </p>
+        <div class="work-grid" id="work-grid"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <span>↗</span>
+          <h3 id="empty-title">검색 결과가 없습니다.</h3>
+          <p id="empty-description">다른 검색어나 형식을 선택해 보세요.</p>
+          <button id="reset-filters" class="text-button">
+            전체 작업 보기 ↗
+          </button>
+        </div>
+        <p class="collection-note">
+          <span id="result-count" role="status" aria-live="polite">3 WORKS</span
+          ><span>더 많은 움직임을, 차근차근 기록합니다.</span>
+        </p>
+        <noscript
+          ><p>
+            작업물 목록과 Spine 뷰어를 사용하려면 JavaScript를 켜 주세요.
+          </p></noscript
+        >
+      </section>
+      <section
+        class="about-section shell"
+        id="about"
+        aria-labelledby="about-heading"
+      >
+        <div class="about-heading">
+          <p class="eyebrow">02 / BEHIND THE MOTION</p>
+          <h2 id="about-heading">
+            움직임으로<br />말하는 사람<span class="accent-dot">.</span>
+          </h2>
+          <div class="signature">전승훈 <span>2D Animator</span></div>
+        </div>
+        <div class="about-content">
+          <p class="about-lead">
+            한 장의 그림이<br />하나의 캐릭터가 되기까지.
+          </p>
+          <p class="about-description">
+            게임 속 2D 캐릭터를 리깅하고 애니메이팅합니다.<br />대기 모션의 작은
+            호흡부터 액션의 타이밍까지,<br />캐릭터가 가진 이야기를 움직임으로
+            표현합니다.
+          </p>
+          <div class="expertise">
+            <div>
+              <span>01</span>
+              <h3>Character rigging</h3>
+              <p>캐릭터의 움직임을 위한 구조</p>
+            </div>
+            <div>
+              <span>02</span>
+              <h3>2D animation</h3>
+              <p>표정, 무게감, 리듬을 담은 모션</p>
+            </div>
+            <div>
+              <span>03</span>
+              <h3>Game motion</h3>
+              <p>게임 안에서 살아 움직이는 캐릭터</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="contact" class="contact-section">
+        <div class="shell">
+          <div class="contact-top">
+            <p class="eyebrow">03 / LET’S MAKE SOMETHING MOVE</p>
+            <span class="contact-symbol" aria-hidden="true">↗</span>
+          </div>
+          <h2>다음 움직임을,<br />함께 만들어 볼까요?</h2>
+          <a class="email-link" href="mailto:tmdgnsks@naver.com"
+            >tmdgnsks@naver.com <span>↗</span></a
+          >
+          <p>작업에 관한 이야기와 협업 제안을 기다립니다.</p>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer shell">
+      <a class="footer-name" href="#top"
+        >SEUNGHUN JEON<span>2D ANIMATOR</span></a
+      ><span
+        >© <span id="current-year">2026</span> 전승훈. All rights
+        reserved.</span
+      ><a href="#top">BACK TO TOP ↑</a>
+    </footer>
+    <dialog id="work-viewer" class="work-viewer" aria-labelledby="viewer-title">
+      <div class="viewer-header">
+        <a class="viewer-brand" href="#work" id="viewer-home"
+          >sh<span>.</span></a
+        ><span class="viewer-kicker">WORK / IN DETAIL</span
+        ><button
+          class="viewer-close"
+          id="viewer-close"
+          aria-label="작품 뷰어 닫기"
+        >
+          닫기 <span>✕</span>
+        </button>
+      </div>
+      <div class="viewer-body">
+        <div class="viewer-media-column">
+          <div class="viewer-stage" id="viewer-stage">
+            <div id="viewer-media"></div>
+            <p
+              id="viewer-message"
+              class="viewer-message"
+              role="status"
+              hidden
+            ></p>
+          </div>
+          <div class="viewer-transport">
+            <div>
+              <span class="viewer-live-dot"></span
+              ><span id="viewer-format">SPINE 4.3</span>
+            </div>
+            <button id="viewer-fullscreen" aria-label="작품 전체 화면으로 보기">
+              전체 화면 ⤢
+            </button>
+          </div>
+        </div>
+        <aside class="viewer-info">
+          <p class="eyebrow" id="viewer-number"></p>
+          <h2 id="viewer-title"></h2>
+          <p id="viewer-description"></p>
+          <dl class="work-facts">
+            <div>
+              <dt>ROLE</dt>
+              <dd id="viewer-role"></dd>
+            </div>
+            <div>
+              <dt>FORMAT</dt>
+              <dd id="viewer-format-detail"></dd>
+            </div>
+          </dl>
+          <div class="viewer-tags" id="viewer-tags"></div>
+          <div class="spine-settings" id="spine-settings">
+            <label
+              >애니메이션<select id="animation-select" disabled>
+                <option>불러오는 중…</option>
+              </select></label
+            ><label
+              >재생 속도<select id="speed-select">
+                <option value="0.25">0.25×</option>
+                <option value="0.5">0.5×</option>
+                <option value="1" selected>1× · 기본 속도</option>
+                <option value="1.5">1.5×</option>
+                <option value="2">2×</option>
+              </select></label
+            ><button class="playback-button" id="viewer-playback" disabled>
+              Ⅱ 일시정지
+            </button>
+          </div>
+          <fieldset class="background-settings">
+            <legend>배경</legend>
+            <button
+              type="button"
+              class="background-swatch is-active"
+              data-background="dark"
+              aria-label="어두운 배경"
+              aria-pressed="true"
+            ></button
+            ><button
+              type="button"
+              class="background-swatch"
+              data-background="light"
+              aria-label="밝은 배경"
+              aria-pressed="false"
+            ></button
+            ><button
+              type="button"
+              class="background-swatch"
+              data-background="grid"
+              aria-label="체크무늬 배경"
+              aria-pressed="false"
+            ></button>
+          </fieldset>
+          <p class="viewer-sample-label" id="viewer-sample-label" hidden>
+            VIEWER SAMPLE · 개인 작업이 아닌 뷰어 예시입니다.
+          </p>
+        </aside>
+      </div>
+      <div class="viewer-footer">
+        <button id="viewer-prev">← 이전 작품</button><span>ESC TO CLOSE</span
+        ><button id="viewer-next">다음 작품 →</button>
+      </div>
+    </dialog>
+  </body>
 </html>
