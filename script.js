@@ -189,13 +189,18 @@ function filteredWorks() {
     if (state.filter === "sample") {
       if (!work.sample) return false;
     } else if (work.sample) return false;
-    if (state.filter === "spine" && !isSpine(work)) return false;
+    const formats = [work, ...(work.mediaItems || [])];
+    if (state.filter === "spine" && !formats.some(isSpine)) return false;
     if (
       state.filter === "image" &&
-      !["image", "gif", "sprite"].includes(work.type)
+      !formats.some((item) => ["image", "gif", "sprite"].includes(item.type))
     )
       return false;
-    if (state.filter === "video" && work.type !== "video") return false;
+    if (
+      state.filter === "video" &&
+      !formats.some((item) => item.type === "video")
+    )
+      return false;
     return (
       !query ||
       [work.title, work.description, work.role, ...(work.tags || [])]
@@ -231,7 +236,13 @@ function attachPoster(preview, work, number) {
   index.textContent = String(number).padStart(2, "0");
   const kind = document.createElement("span");
   kind.className = "card-kind";
-  kind.textContent = isSpine(work) ? "SPINE" : formatType(work);
+  kind.textContent = [
+    ...new Set(
+      (work.mediaItems || [work]).map((item) =>
+        isSpine(item) ? "SPINE" : formatType(item),
+      ),
+    ),
+  ].join(" / ");
   const arrow = document.createElement("span");
   arrow.className = "card-open";
   arrow.textContent = "↗";
@@ -460,64 +471,66 @@ function openWork(work, list = filteredWorks()) {
     return;
   }
   if (isSpine(work)) {
-    if (!window.spine?.SpinePlayer) {
-      showViewerMessage(
-        "Spine 런타임을 불러오지 못했습니다. 페이지를 새로고침해 주세요.",
-      );
-      return;
-    }
-    try {
-      state.viewerPlayer = new window.spine.SpinePlayer(
-        media,
-        playerConfig(work, {
-          showControls: true,
-          interactive: true,
-          success(player) {
-            if (token !== state.viewerToken) return;
-            state.viewerPlayer = player;
-            const animations = visibleAnimations(player, work);
-            player.config.animations = animations.map(
-              (animation) => animation.name,
-            );
-            $("#animation-select").replaceChildren();
-            animations.forEach((animation) =>
-              $("#animation-select").add(
-                new Option(animation.name, animation.name),
-              ),
-            );
-            const initial =
-              animations.find(
-                (animation) => animation.name === work.animation,
-              ) || animations[0];
-            if (initial) {
-              $("#animation-select").value = initial.name;
-              player.config.animation = initial.name;
-              player.setAnimation(initial.name, true);
-            }
-            $("#animation-select").disabled = animations.length === 0;
-            $("#viewer-playback").disabled = false;
-            if (motionPreference.matches) player.pause();
-            syncPlaybackButton();
-          },
-          error(player, message) {
-            if (token !== state.viewerToken) return;
-            showViewerMessage(
-              "작품을 불러오지 못했습니다. Spine 4.3 파일, atlas와 텍스처 경로를 확인해 주세요. " +
-                String(message || ""),
-            );
-          },
-        }),
-      );
-    } catch (error) {
-      showViewerMessage(
-        "Spine 뷰어를 시작할 수 없습니다. WebGL 지원 여부를 확인해 주세요. " +
-          error.message,
-      );
-    }
+    openSpine(work, token);
   } else if (work.type === "video") {
     openVideo(work, token);
   } else {
     openImage(work, token);
+  }
+}
+function openSpine(work, token) {
+  if (!window.spine?.SpinePlayer) {
+    showViewerMessage(
+      "Spine 런타임을 불러오지 못했습니다. 페이지를 새로고침해 주세요.",
+    );
+    return;
+  }
+  try {
+    state.viewerPlayer = new window.spine.SpinePlayer(
+      media,
+      playerConfig(work, {
+        showControls: true,
+        interactive: true,
+        success(player) {
+          if (token !== state.viewerToken) return;
+          state.viewerPlayer = player;
+          const animations = visibleAnimations(player, work);
+          player.config.animations = animations.map(
+            (animation) => animation.name,
+          );
+          $("#animation-select").replaceChildren();
+          animations.forEach((animation) =>
+            $("#animation-select").add(
+              new Option(animation.name, animation.name),
+            ),
+          );
+          const initial =
+            animations.find((animation) => animation.name === work.animation) ||
+            animations[0];
+          if (initial) {
+            $("#animation-select").value = initial.name;
+            player.config.animation = initial.name;
+            player.setAnimation(initial.name, true);
+          }
+          $("#animation-select").disabled = animations.length === 0;
+          $("#viewer-playback").disabled = false;
+          if (motionPreference.matches) player.pause();
+          syncPlaybackButton();
+        },
+        error(player, message) {
+          if (token !== state.viewerToken) return;
+          showViewerMessage(
+            "작품을 불러오지 못했습니다. Spine 4.3 파일, atlas와 텍스처 경로를 확인해 주세요. " +
+              String(message || ""),
+          );
+        },
+      }),
+    );
+  } catch (error) {
+    showViewerMessage(
+      "Spine 뷰어를 시작할 수 없습니다. WebGL 지원 여부를 확인해 주세요. " +
+        error.message,
+    );
   }
 }
 function openImage(work, token) {
@@ -554,10 +567,21 @@ function selectProjectMedia(work, index) {
       button.classList.toggle("is-active", current === index);
       button.setAttribute("aria-pressed", String(current === index));
     });
-  const selected = { ...item, title: item.title || work.title };
+  const selected = { ...work, ...item, title: item.title || work.title };
   setText("#viewer-format", formatType(selected));
-  setText("#viewer-format-detail", formatType(selected));
-  if (selected.type === "video") openVideo(selected, token);
+  setText(
+    "#viewer-format-detail",
+    isSpine(selected)
+      ? "Spine " + (selected.spineVersion || "4.3")
+      : formatType(selected),
+  );
+  $("#spine-settings").hidden = !isSpine(selected);
+  if (isSpine(selected)) {
+    $("#speed-select").value = "1";
+    $("#animation-select").replaceChildren(new Option("불러오는 중…", ""));
+    $("#animation-select").disabled = true;
+    openSpine(selected, token);
+  } else if (selected.type === "video") openVideo(selected, token);
   else openImage(selected, token);
 }
 function openVideo(work, token) {
@@ -599,7 +623,17 @@ function openVideo(work, token) {
   video.controls = true;
   video.loop = true;
   video.playsInline = true;
-  video.preload = "metadata";
+  video.setAttribute("loop", "");
+  video.setAttribute("playsinline", "");
+  const autoplay = work.autoplay !== false;
+  video.autoplay = autoplay;
+  video.preload = autoplay ? "auto" : "metadata";
+  if (autoplay) {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("autoplay", "");
+  }
   if (work.thumbnail) video.poster = work.thumbnail;
   video.src = work.media;
   video.addEventListener("error", () => {
@@ -608,7 +642,20 @@ function openVideo(work, token) {
         "영상을 불러오지 못했습니다. 파일 경로 또는 브라우저의 포맷 지원을 확인해 주세요.",
       );
   });
+  video.addEventListener("playing", () => {
+    if (token === state.viewerToken) $("#viewer-message").hidden = true;
+  });
   media.append(video);
+  if (autoplay) {
+    const attempt = video.play();
+    if (attempt?.catch)
+      attempt.catch(() => {
+        if (token === state.viewerToken)
+          showViewerMessage(
+            "자동 재생이 제한되었습니다. 영상의 재생 버튼을 눌러 주세요.",
+          );
+      });
+  }
 }
 function syncPlaybackButton() {
   const player = state.viewerPlayer;

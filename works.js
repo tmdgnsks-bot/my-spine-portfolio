@@ -94,6 +94,19 @@ const works = [
     thumbnail: "assets/previews/lineage-w-mage.webp",
     backgroundColor: "#627365",
     featured: true,
+    mediaItems: [
+      {
+        title: "동영상 · 반복 재생",
+        type: "video",
+        media: "assets/nc1/wizard-npc.mp4",
+        thumbnail: "assets/previews/wizard-npc-video.webp",
+        autoplay: true,
+      },
+      {
+        title: "Spine 뷰어",
+        type: "spine",
+      },
+    ],
   },
   {
     id: "ar15-study",
