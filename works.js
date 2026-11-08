@@ -11,7 +11,6 @@ const works = [
   {
     id: "lineage-w-mage",
     title: "리니지W · 마법사 NPC",
-    subtitle: "A quiet moment of magic.",
     role: "리깅 & 애니메이션",
     tags: ["NPC", "캐릭터", "리깅"],
     description:
@@ -28,7 +27,6 @@ const works = [
   {
     id: "ar15-study",
     title: "소녀전선 · 캐릭터 스터디",
-    subtitle: "Small character, big personality.",
     role: "리깅 & 애니메이션",
     tags: ["개인 습작", "SD 캐릭터", "액션"],
     description:
@@ -45,7 +43,6 @@ const works = [
   {
     id: "hk419-motion",
     title: "HK419 · 액션 스터디",
-    subtitle: "Finding rhythm in every action.",
     role: "리깅 & 애니메이션",
     tags: ["개인 습작", "게임 모션", "액션"],
     description:
@@ -62,7 +59,6 @@ const works = [
   {
     id: "burst-sample",
     title: "Burst · GIF 샘플",
-    subtitle: "A little burst of energy.",
     role: "GIF 뷰어 샘플",
     tags: ["GIF", "이펙트", "샘플"],
     description:
@@ -75,7 +71,6 @@ const works = [
   {
     id: "spineboy-sample",
     title: "Spineboy · 공식 샘플",
-    subtitle: "Explore the Spine player.",
     role: "Esoteric Software 공식 예제",
     tags: ["Spine 4.3", "공식 예제", "샘플"],
     description:

@@ -1,6 +1,6 @@
-# 전승훈 — Made to move.
+# 전승훈 — 2D 애니메이션 포트폴리오
 
-밝은 종이색 배경, 큰 타이포그래피, 실시간 캐릭터 무대를 중심으로 새로 만든 Spine 포트폴리오입니다.
+작품, 담당 작업과 연락처를 중심으로 구성한 Spine 포트폴리오입니다.
 
 **사이트:** https://tmdgnsks-bot.github.io/my-spine-portfolio/
 
@@ -42,7 +42,6 @@ vendor/spine-player/ 공식 Spine 4.3 런타임과 스타일
 {
   id: "my-character",                       // 작품마다 다른 값
   title: "캐릭터 이름",
-  subtitle: "A story in motion.",            // 선택: 카드의 짧은 보조 문구
   role: "리깅 & 애니메이션",
   tags: ["캐릭터", "액션"],
   description: "작업 내용과 담당 역할을 설명해 주세요.",

@@ -1567,3 +1567,120 @@ nav span {
     animation: none !important;
   }
 }
+
+/* Compact, factual presentation. */
+.hero {
+  padding-block: 40px 44px;
+}
+.hero h1 {
+  font-family: var(--korean);
+  font-size: clamp(40px, 4.5vw, 64px);
+  letter-spacing: -2px;
+  line-height: 1.45;
+  margin: 20px 0;
+}
+.hero h1 > span {
+  font-size: 0.55em;
+  font-weight: 500;
+  color: #62685e;
+  letter-spacing: -1px;
+}
+.hero-intro p {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  color: #62685e;
+}
+.feature-stage {
+  aspect-ratio: 1.22;
+}
+.work-section {
+  padding-block: 48px 52px;
+  border-top: 1px solid var(--line);
+}
+.section-heading h2,
+.about-heading h2 {
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+.card-subtitle:empty {
+  display: none;
+}
+.about-section {
+  padding-block: 38px 42px;
+  align-items: start;
+}
+.about-heading h2 {
+  margin-top: 10px;
+}
+.profile-facts {
+  margin: 0;
+}
+.profile-facts > div {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.profile-facts dt {
+  color: #62685e;
+}
+.profile-facts dd {
+  margin: 0;
+}
+.contact-section {
+  padding-block: 32px 38px;
+}
+.contact-section h2 {
+  font-size: 25px;
+  letter-spacing: -0.5px;
+}
+.email-link {
+  font-size: clamp(20px, 2.5vw, 30px);
+  margin-top: 15px;
+}
+@media (max-width: 760px) {
+  .hero {
+    padding-block: 30px;
+    gap: 28px;
+  }
+  .hero h1 {
+    font-size: 44px;
+    letter-spacing: -1.5px;
+    margin: 15px 0;
+  }
+  .hero-intro p {
+    font-size: 12px;
+  }
+  .hero-copy .eyebrow {
+    font-size: 9px;
+  }
+  .feature-stage {
+    aspect-ratio: 1.1;
+  }
+  .work-section {
+    padding-block: 34px;
+  }
+  .section-heading {
+    align-items: center;
+  }
+  .section-heading > p {
+    margin-top: 0;
+    font-size: 9px;
+  }
+  .about-section {
+    padding-block: 30px;
+    gap: 20px;
+  }
+  .section-heading h2,
+  .about-heading h2 {
+    font-size: 25px;
+  }
+  .profile-facts > div {
+    grid-template-columns: 75px 1fr;
+    gap: 12px;
+    font-size: 11px;
+  }
+}

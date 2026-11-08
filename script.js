@@ -139,7 +139,7 @@ function changeHero(index) {
   setText("#hero-status", "미리보기 불러오는 중");
   function error() {
     if (token !== state.heroToken) return;
-    setText("#hero-status", "CHARACTER PREVIEW");
+    setText("#hero-status", "미리보기");
     setText(
       "#hero-error",
       "실시간 미리보기를 불러오지 못했습니다. 자세히 보기에서 다시 시도해 주세요.",
@@ -158,7 +158,7 @@ function changeHero(index) {
         success(player) {
           if (token !== state.heroToken) return;
           poster.classList.add("is-loaded");
-          setText("#hero-status", "● LIVE PREVIEW");
+          setText("#hero-status", "● 재생 중");
           $("#hero-pause").disabled = false;
           // Success may be synchronous in mocked/cached runtimes.
           state.heroPlayer = player;
