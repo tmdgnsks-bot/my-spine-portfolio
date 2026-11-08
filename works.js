@@ -9,6 +9,19 @@
  */
 const works = [
   {
+    id: "dog-walk",
+    title: "강아지 걷기",
+    role: "캐릭터 애니메이션",
+    tags: ["강아지", "걷기", "모션"],
+    description: "강아지 캐릭터의 걷기 모션 작업입니다.",
+    type: "video",
+    media: "assets/dog-walk/dog-walk.mp4",
+    thumbnail: "assets/previews/dog-walk.webp",
+    backgroundColor: "#b7c4b4",
+    heroBackground: "#b7c4b4",
+    autoplay: true,
+  },
+  {
     id: "demon-follower",
     title: "악마 추종자",
     role: "캐릭터 애니메이션",
