@@ -1884,32 +1884,69 @@ nav span {
 .viewer-media-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 15px;
+  background: #eef1e8;
+  border: 1px solid #c4cdb9;
+  border-radius: 8px;
+}
+.media-tabs-heading {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 2px;
+  color: #202721;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.media-tabs-count {
+  padding: 2px 7px;
+  background: #d9e7c5;
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: 0;
 }
 .viewer-media-tabs button {
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 9px 13px;
-  font-size: 11px;
+  min-height: 46px;
+  padding: 11px 18px;
+  background: #e7ecdf;
+  border: 2px solid #758669;
+  border-radius: 6px;
+  color: #202721;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
 }
 .viewer-media-tabs button:hover {
-  background: #e4e7dc;
+  background: #dbe7c7;
+  border-color: #283a1d;
 }
 .viewer-media-tabs button.is-active {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
+  background: var(--acid);
+  border-color: #283a1d;
+  color: #202721;
+}
+.viewer-media-tabs button:focus-visible {
+  outline: 3px solid #4b6b2f;
+  outline-offset: 3px;
 }
 @media (max-width: 760px) {
   .viewer-media-tabs {
-    gap: 6px;
-    margin-bottom: 10px;
+    gap: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  .media-tabs-heading {
+    font-size: 14px;
   }
   .viewer-media-tabs button {
-    padding: 8px 10px;
-    font-size: 10px;
+    min-height: 44px;
+    padding: 10px 15px;
+    font-size: 14px;
   }
 }
 

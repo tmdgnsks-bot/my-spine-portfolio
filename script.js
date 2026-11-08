@@ -586,6 +586,15 @@ function openWork(work, list = filteredWorks()) {
   if (Array.isArray(work.mediaItems) && work.mediaItems.length) {
     const tabs = $("#viewer-media-tabs");
     tabs.hidden = work.mediaItems.length < 2;
+    const heading = document.createElement("div");
+    heading.className = "media-tabs-heading";
+    const label = document.createElement("span");
+    label.textContent = "다른 영상·모션 보기";
+    const count = document.createElement("span");
+    count.className = "media-tabs-count";
+    count.textContent = work.mediaItems.length + "개";
+    heading.append(label, count);
+    tabs.append(heading);
     work.mediaItems.forEach((item, index) => {
       const button = document.createElement("button");
       button.type = "button";
