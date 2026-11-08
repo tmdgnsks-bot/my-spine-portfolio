@@ -9,6 +9,36 @@
  */
 const works = [
   {
+    id: "lineage-w-zillian",
+    title: "리니지W · 궁수 NPC 질리언",
+    role: "Spine 애니메이션",
+    tags: ["리니지W", "궁수", "NPC"],
+    description:
+      "리니지W 궁수 NPC 질리언의 Spine 애니메이션 작업입니다. 동영상과 Spine 뷰어로 확인할 수 있습니다.",
+    type: "spine",
+    skeleton: "assets/zillian/Portrait_Polymorph_Hero_Zillian.json",
+    atlas: "assets/zillian/Portrait_Polymorph_Hero_Zillian.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    thumbnail: "assets/previews/zillian.webp",
+    backgroundColor: "#596a5e",
+    heroBackground: "#657a69",
+    featured: true,
+    mediaItems: [
+      {
+        title: "동영상 · 반복 재생",
+        type: "video",
+        media: "assets/zillian/zillian-npc.mp4",
+        thumbnail: "assets/previews/zillian-video.webp",
+        autoplay: true,
+      },
+      {
+        title: "Spine 뷰어",
+        type: "spine",
+      },
+    ],
+  },
+  {
     id: "turn-rpg-animation",
     title: "턴제 RPG · 캐릭터 애니메이션",
     role: "캐릭터 애니메이션",
