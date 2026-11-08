@@ -9,6 +9,50 @@
  */
 const works = [
   {
+    id: "legend-of-slime-skills",
+    title: "레전드 오브 슬라임 · 스킬 연출",
+    role: "스킬 애니메이션",
+    tags: ["레전드 오브 슬라임", "스킬 연출", "Spine"],
+    description:
+      "레전드 오브 슬라임의 스킬 연출 작업입니다. 게임 화면 3개와 Spine 작업 화면 녹화 영상을 함께 정리했습니다.",
+    type: "video",
+    media: "assets/legend-of-slime-skills/clip-1.mp4",
+    thumbnail: "assets/previews/legend-skills-1.webp",
+    backgroundColor: "#343540",
+    heroBackground: "#343540",
+    autoplay: true,
+    mediaItems: [
+      {
+        title: "게임 화면 1",
+        type: "video",
+        media: "assets/legend-of-slime-skills/clip-1.mp4",
+        thumbnail: "assets/previews/legend-skills-1.webp",
+        autoplay: true,
+      },
+      {
+        title: "게임 화면 2",
+        type: "video",
+        media: "assets/legend-of-slime-skills/clip-2.mp4",
+        thumbnail: "assets/previews/legend-skills-2.webp",
+        autoplay: true,
+      },
+      {
+        title: "게임 화면 3",
+        type: "video",
+        media: "assets/legend-of-slime-skills/clip-3.mp4",
+        thumbnail: "assets/previews/legend-skills-3.webp",
+        autoplay: true,
+      },
+      {
+        title: "Spine 작업 화면",
+        type: "video",
+        media: "assets/legend-of-slime-skills/clip-4.mp4",
+        thumbnail: "assets/previews/legend-skills-4.webp",
+        autoplay: true,
+      },
+    ],
+  },
+  {
     id: "slime-quest-encounter-npcs",
     title: "슬라임 퀘스트 · 인카운터 NPC 모션",
     role: "NPC 애니메이션",
