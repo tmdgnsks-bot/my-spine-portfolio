@@ -9,6 +9,23 @@
  */
 const works = [
   {
+    id: "skeleton-knight",
+    title: "스켈레톤 기사",
+    role: "캐릭터 애니메이션",
+    tags: ["스켈레톤", "기사", "액션"],
+    description:
+      "스켈레톤 기사 캐릭터의 대기, 이동, 피격, 공격 및 스킬 애니메이션입니다.",
+    type: "spine",
+    skeleton: "assets/skeleton-knight/40300_skeleton_mBoss_c_shield.json",
+    atlas: "assets/skeleton-knight/40300_skeleton_mBoss_c_shield.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    thumbnail: "assets/previews/skeleton-knight.webp",
+    backgroundColor: "#596579",
+    heroBackground: "#66748a",
+    featured: true,
+  },
+  {
     id: "lineage-w-mage",
     title: "리니지W · 마법사 NPC",
     role: "리깅 & 애니메이션",
