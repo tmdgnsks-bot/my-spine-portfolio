@@ -9,6 +9,18 @@
  */
 const works = [
   {
+    id: "eire-fanart",
+    title: "마비노기 영웅전 · 에이레",
+    role: "Spine 애니메이션",
+    tags: ["팬아트", "마비노기 영웅전", "GIF"],
+    description:
+      "마비노기 영웅전 NPC 에이레의 원화를 바탕으로 제작한 비공식 팬 애니메이션입니다. Spine 애니메이션 작업을 담당했습니다.",
+    type: "gif",
+    media: "assets/eire-fanart/eire.gif",
+    thumbnail: "assets/previews/eire-fanart.webp",
+    backgroundColor: "#71735f",
+  },
+  {
     id: "frog-witch",
     title: "개구리 마녀",
     role: "캐릭터 애니메이션",
