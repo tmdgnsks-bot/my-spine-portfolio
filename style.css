@@ -1684,3 +1684,198 @@ nav span {
     font-size: 11px;
   }
 }
+
+/* Prioritize the work and keep the introduction compact. */
+.site-header {
+  height: 72px;
+}
+.wordmark {
+  font-size: 34px;
+  letter-spacing: -3px;
+}
+.hero {
+  grid-template-columns: minmax(210px, 0.58fr) minmax(0, 1.42fr);
+  gap: 4%;
+  padding-block: 24px;
+  align-items: center;
+}
+.hero-copy {
+  padding: 0;
+}
+.hero h1 {
+  font-size: 42px;
+  line-height: 1.3;
+  letter-spacing: -1.5px;
+  margin: 0 0 14px;
+}
+.hero h1 > span {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-top: 5px;
+}
+.hero-intro p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.feature-stage {
+  height: clamp(320px, 25vw, 420px);
+  aspect-ratio: auto;
+  background: #627365;
+}
+.feature-stage:after {
+  box-shadow: none;
+}
+.hero-player {
+  inset: 16px 10px 12px;
+}
+.hero-poster {
+  inset: 4% 5%;
+  width: 90%;
+  height: 92%;
+}
+.stage-topline {
+  left: 18px;
+  right: 18px;
+  top: 17px;
+  font-size: 10px;
+}
+.live-label {
+  background: #263127;
+  border-radius: 3px;
+  padding: 4px 7px;
+  letter-spacing: 0.5px;
+}
+.stage-format {
+  color: #f0f3ea;
+  letter-spacing: 0.5px;
+}
+.stage-bottomline {
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  justify-content: flex-end;
+}
+.feature-caption {
+  padding: 12px 0 0;
+  min-height: 50px;
+  gap: 20px;
+}
+.feature-caption h2 {
+  font-size: 14px;
+  margin: 0;
+}
+.feature-navigation {
+  border: 0;
+  padding: 0;
+  margin-left: auto;
+  gap: 22px;
+  flex-shrink: 0;
+}
+.circle-arrow {
+  width: 32px;
+  height: 32px;
+  font-size: 19px;
+}
+.work-section {
+  padding-block: 28px 44px;
+}
+.section-heading {
+  margin-bottom: 18px;
+  align-items: center;
+}
+.section-heading h2 {
+  margin-top: 0;
+  font-size: 25px;
+}
+.section-heading > p {
+  font-size: 11px;
+}
+.work-toolbar {
+  margin-bottom: 22px;
+  padding-block: 10px;
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .hero {
+    grid-template-columns: minmax(190px, 0.6fr) minmax(0, 1.4fr);
+  }
+  .hero h1 {
+    font-size: 36px;
+  }
+  .hero h1 > span {
+    font-size: 18px;
+  }
+  .feature-caption {
+    gap: 12px;
+  }
+  .feature-navigation {
+    gap: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .site-header {
+    height: 64px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-block: 22px;
+  }
+  .hero h1 {
+    font-size: 30px;
+    margin: 0 0 8px;
+    line-height: 1.3;
+    letter-spacing: -1px;
+  }
+  .hero h1 br {
+    display: none;
+  }
+  .hero h1 > span {
+    font-size: 16px;
+    margin: 0 0 0 12px;
+    letter-spacing: -0.4px;
+  }
+  .hero-intro p {
+    font-size: 11px;
+  }
+  .feature-stage {
+    height: 300px;
+  }
+  .feature-caption {
+    gap: 12px;
+    min-height: 47px;
+    padding-top: 10px;
+  }
+  .feature-caption h2 {
+    font-size: 12px;
+  }
+  .feature-navigation {
+    gap: 10px;
+  }
+  .hero-dots {
+    display: none;
+  }
+  .feature-navigation > div:last-child {
+    gap: 9px;
+  }
+  .circle-arrow {
+    width: 29px;
+    height: 29px;
+  }
+  .stage-topline {
+    font-size: 9px;
+    left: 13px;
+    right: 13px;
+    top: 13px;
+  }
+  .work-section {
+    padding-block: 24px 34px;
+  }
+  .section-heading h2 {
+    font-size: 23px;
+  }
+  .section-heading > p {
+    font-size: 9px;
+  }
+}

@@ -17,47 +17,37 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="vendor/spine-player/spine-player.min.css" />
-    <link rel="stylesheet" href="style.css?v=20261108b" />
+    <link rel="stylesheet" href="style.css?v=20261108c" />
     <script defer src="vendor/spine-player/spine-player.min.js"></script>
     <script defer src="works.js?v=20261108b"></script>
-    <script defer src="script.js?v=20261108b"></script>
+    <script defer src="script.js?v=20261108c"></script>
   </head>
   <body>
     <a class="skip-link" href="#work">작업물로 바로 가기</a>
     <header class="site-header shell">
       <a href="#top" class="wordmark" aria-label="전승훈 포트폴리오 처음으로"
-        >sh<span class="logo-dot">.</span
-        ><span class="wordmark-label">SEUNGHUN<br />JEON</span></a
+        >sh<span class="logo-dot">.</span></a
       >
       <nav aria-label="주 메뉴">
         <a href="#work">Work <span id="nav-work-count">03</span></a
         ><a href="#about">About</a
         ><a href="#contact">Contact <span>↗</span></a>
       </nav>
-      <span class="header-caption">2D ANIMATION PORTFOLIO</span>
     </header>
     <main id="top">
       <section class="hero shell" aria-labelledby="hero-heading">
         <div class="hero-copy">
-          <p class="eyebrow">PORTFOLIO</p>
           <h1 id="hero-heading">전승훈<br /><span>2D 애니메이터</span></h1>
           <div class="hero-intro"><p>Spine 리깅 · 캐릭터 애니메이션</p></div>
-          <a class="primary-link" href="#work">작업물 보기 <span>↘</span></a>
         </div>
         <div class="feature">
           <div class="feature-stage" id="hero-stage">
-            <span class="stage-cross stage-cross--tl" aria-hidden="true">+</span
-            ><span class="stage-cross stage-cross--br" aria-hidden="true"
-              >+</span
-            >
             <div class="stage-topline">
               <span class="live-label" id="hero-status"
                 ><i></i> LIVE PREVIEW</span
               ><span class="stage-format">SPINE / 4.3</span>
             </div>
-            <span class="stage-watermark" aria-hidden="true" id="hero-watermark"
-              >01</span
-            >
+
             <img
               id="hero-poster"
               src="assets/nc1/thumbnail.png"
@@ -71,8 +61,7 @@
             ></div>
             <p class="hero-error" id="hero-error" role="status" hidden></p>
             <div class="stage-bottomline">
-              <span>미리보기</span
-              ><button
+              <button
                 id="hero-pause"
                 class="stage-icon"
                 aria-label="미리보기 일시정지"
@@ -84,8 +73,20 @@
           </div>
           <div class="feature-caption">
             <div>
-              <span class="label" id="hero-category">대표 작업</span>
               <h2 id="hero-title">리니지W · 마법사 NPC</h2>
+            </div>
+            <div class="feature-navigation">
+              <div
+                id="hero-dots"
+                class="hero-dots"
+                role="group"
+                aria-label="대표 작품 선택"
+              ></div>
+
+              <div>
+                <button id="hero-prev" aria-label="이전 대표 작품">←</button
+                ><button id="hero-next" aria-label="다음 대표 작품">→</button>
+              </div>
             </div>
             <button
               class="circle-arrow"
@@ -94,19 +95,6 @@
             >
               ↗
             </button>
-          </div>
-          <div class="feature-navigation">
-            <div
-              id="hero-dots"
-              class="hero-dots"
-              role="group"
-              aria-label="대표 작품 선택"
-            ></div>
-
-            <div>
-              <button id="hero-prev" aria-label="이전 대표 작품">←</button
-              ><button id="hero-next" aria-label="다음 대표 작품">→</button>
-            </div>
           </div>
         </div>
       </section>
@@ -118,7 +106,6 @@
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow">WORK</p>
             <h2 id="work-heading">작업물</h2>
           </div>
           <p>작품을 선택하면 상세 뷰어가 열립니다.</p>

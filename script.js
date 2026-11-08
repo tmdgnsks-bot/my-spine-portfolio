@@ -102,6 +102,7 @@ function syncHeroPlayback() {
   )
     player.pause();
   else player.play();
+  setText("#hero-status", player.paused ? "미리보기 일시정지" : "● 재생 중");
   $("#hero-pause").textContent = player.paused ? "▷" : "Ⅱ";
   $("#hero-pause").setAttribute(
     "aria-label",
@@ -118,9 +119,7 @@ function changeHero(index) {
   state.heroManualPause = motionPreference.matches;
   const work = featuredWorks[state.heroIndex];
   setText("#hero-title", work.title);
-  setText("#hero-watermark", String(state.heroIndex + 1).padStart(2, "0"));
-  $("#hero-stage").style.background =
-    `radial-gradient(ellipse at 50% 45%, ${work.backgroundColor || "#344235"}, #18221c)`;
+  $("#hero-stage").style.background = work.heroBackground || "#627365";
   const poster = $("#hero-poster");
   poster.classList.remove("is-loaded");
   if (work.thumbnail) {
@@ -155,6 +154,12 @@ function changeHero(index) {
     state.heroPlayer = new window.spine.SpinePlayer(
       $("#hero-player"),
       playerConfig(work, {
+        viewport: {
+          padLeft: "1%",
+          padRight: "1%",
+          padTop: "1%",
+          padBottom: "1%",
+        },
         success(player) {
           if (token !== state.heroToken) return;
           poster.classList.add("is-loaded");
