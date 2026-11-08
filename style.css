@@ -1879,3 +1879,36 @@ nav span {
     font-size: 9px;
   }
 }
+
+/* Related clips in a single project. */
+.viewer-media-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.viewer-media-tabs button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 9px 13px;
+  font-size: 11px;
+}
+.viewer-media-tabs button:hover {
+  background: #e4e7dc;
+}
+.viewer-media-tabs button.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+@media (max-width: 760px) {
+  .viewer-media-tabs {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .viewer-media-tabs button {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+}

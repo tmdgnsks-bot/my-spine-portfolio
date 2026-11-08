@@ -85,6 +85,24 @@ vendor/spine-player/ 공식 Spine 4.3 런타임과 스타일
 
 GIF는 브라우저 기본 이미지 재생으로 보여주며 별도의 일시정지·타임라인 기능은 없습니다. 기존 `type: "sprite"` 항목도 이미지 모드로 호환됩니다.
 
+### 같은 프로젝트의 여러 영상 묶기
+
+작품 하나의 `mediaItems`에 GIF, 이미지 또는 동영상을 나열하면 상세 뷰어에 전환 버튼이 표시됩니다. 목록에는 프로젝트 카드 하나만 표시하고, 선택한 항목을 다시 눌러도 재생을 다시 시작하지 않습니다.
+
+```js
+{
+  id: "project",
+  title: "턴제 RPG · 캐릭터 애니메이션",
+  type: "gif",
+  media: "assets/project/character.gif",
+  thumbnail: "assets/project/cover.webp",
+  mediaItems: [
+    { title: "캐릭터 단독 모션", type: "gif", media: "assets/project/character.gif" },
+    { title: "인게임 전투", type: "gif", media: "assets/project/gameplay.gif" },
+  ],
+},
+```
+
 ### 동영상
 
 ```js

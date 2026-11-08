@@ -9,6 +9,32 @@
  */
 const works = [
   {
+    id: "turn-rpg-animation",
+    title: "턴제 RPG · 캐릭터 애니메이션",
+    role: "캐릭터 애니메이션",
+    tags: ["턴제 RPG", "캐릭터", "인게임"],
+    description:
+      "턴제 RPG에 사용된 캐릭터 애니메이션 작업입니다. 다안 괴수의 단독 모션과 인게임 전투 적용 영상을 함께 정리했습니다.",
+    type: "gif",
+    media: "assets/turn-based-rpg/many-eyed-monster.gif",
+    thumbnail: "assets/previews/turn-rpg-monster.webp",
+    backgroundColor: "#898989",
+    mediaItems: [
+      {
+        title: "다안 괴수 · 단독 모션",
+        type: "gif",
+        media: "assets/turn-based-rpg/many-eyed-monster.gif",
+        thumbnail: "assets/previews/turn-rpg-monster.webp",
+      },
+      {
+        title: "인게임 전투 · 적용 영상",
+        type: "gif",
+        media: "assets/turn-based-rpg/mermaid.gif",
+        thumbnail: "assets/previews/turn-rpg-mermaid.webp",
+      },
+    ],
+  },
+  {
     id: "eire-fanart",
     title: "마비노기 영웅전 · 에이레",
     role: "Spine 애니메이션",

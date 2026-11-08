@@ -15,6 +15,7 @@ const state = {
   heroManualPause: false,
   viewerPlayer: null,
   viewerToken: 0,
+  viewerMediaIndex: -1,
   currentWork: null,
   viewerWorks: [],
   focusBeforeViewer: null,
@@ -234,6 +235,8 @@ function attachPoster(preview, work, number) {
   const arrow = document.createElement("span");
   arrow.className = "card-open";
   arrow.textContent = "↗";
+  if (work.mediaItems?.length > 1)
+    kind.textContent += " · " + work.mediaItems.length;
   preview.append(index, kind, arrow);
   if (work.sample) {
     const sample = document.createElement("span");
@@ -393,6 +396,9 @@ function openWork(work, list = filteredWorks()) {
   disposeViewer();
   const token = state.viewerToken;
   state.currentWork = work;
+  state.viewerMediaIndex = -1;
+  $("#viewer-media-tabs").replaceChildren();
+  $("#viewer-media-tabs").hidden = true;
   state.viewerWorks =
     list.length && list.includes(work)
       ? list
@@ -439,6 +445,20 @@ function openWork(work, list = filteredWorks()) {
     viewer.showModal();
   }
   syncHeroPlayback();
+  if (Array.isArray(work.mediaItems) && work.mediaItems.length) {
+    const tabs = $("#viewer-media-tabs");
+    tabs.hidden = work.mediaItems.length < 2;
+    work.mediaItems.forEach((item, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = item.title || "영상 " + (index + 1);
+      button.setAttribute("aria-pressed", "false");
+      button.addEventListener("click", () => selectProjectMedia(work, index));
+      tabs.append(button);
+    });
+    selectProjectMedia(work, 0);
+    return;
+  }
   if (isSpine(work)) {
     if (!window.spine?.SpinePlayer) {
       showViewerMessage(
@@ -497,22 +517,48 @@ function openWork(work, list = filteredWorks()) {
   } else if (work.type === "video") {
     openVideo(work, token);
   } else {
-    const src = work.media || work.thumbnail;
-    if (!src) {
-      showViewerMessage("표시할 이미지 파일이 없습니다.");
-      return;
-    }
-    const image = document.createElement("img");
-    image.src = src;
-    image.alt = work.title;
-    image.addEventListener("error", () => {
-      if (token === state.viewerToken)
-        showViewerMessage(
-          "이미지를 불러오지 못했습니다. 파일 경로를 확인해 주세요.",
-        );
-    });
-    media.append(image);
+    openImage(work, token);
   }
+}
+function openImage(work, token) {
+  const src = work.media || work.thumbnail;
+  if (!src) {
+    showViewerMessage("표시할 이미지 파일이 없습니다.");
+    return;
+  }
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = work.title;
+  image.addEventListener("error", () => {
+    if (token === state.viewerToken)
+      showViewerMessage(
+        "이미지를 불러오지 못했습니다. 파일 경로를 확인해 주세요.",
+      );
+  });
+  media.append(image);
+}
+function selectProjectMedia(work, index) {
+  if (state.currentWork !== work) return;
+  const item = work.mediaItems?.[index];
+  if (!item) return;
+  // Clicking the selected item preserves its running animation.
+  if (state.viewerMediaIndex === index && media.children.length) return;
+  disposeViewer();
+  state.viewerMediaIndex = index;
+  const token = state.viewerToken;
+  $("#viewer-message").hidden = true;
+  $("#spine-settings").hidden = true;
+  $("#viewer-media-tabs")
+    .querySelectorAll("button")
+    .forEach((button, current) => {
+      button.classList.toggle("is-active", current === index);
+      button.setAttribute("aria-pressed", String(current === index));
+    });
+  const selected = { ...item, title: item.title || work.title };
+  setText("#viewer-format", formatType(selected));
+  setText("#viewer-format-detail", formatType(selected));
+  if (selected.type === "video") openVideo(selected, token);
+  else openImage(selected, token);
 }
 function openVideo(work, token) {
   if (work.embedUrl) {
