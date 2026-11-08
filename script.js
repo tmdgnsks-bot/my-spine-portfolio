@@ -12,7 +12,6 @@ const state = {
   heroIndex: 0,
   heroPlayer: null,
   heroToken: 0,
-  heroVisible: true,
   heroManualPause: false,
   viewerPlayer: null,
   viewerToken: 0,
@@ -94,14 +93,10 @@ function visibleAnimations(player, work) {
 function syncHeroPlayback() {
   const player = state.heroPlayer;
   if (!player?.skeleton) return;
-  if (
-    state.heroManualPause ||
-    !state.heroVisible ||
-    document.hidden ||
-    viewer.open
-  )
-    player.pause();
-  else player.play();
+  // Only an explicit click on the preview's pause button changes playback.
+  // Avoid calling play() again while it is running so the current track is preserved.
+  if (state.heroManualPause && !player.paused) player.pause();
+  else if (!state.heroManualPause && player.paused) player.play();
   setText("#hero-status", player.paused ? "미리보기 일시정지" : "● 재생 중");
   $("#hero-pause").textContent = player.paused ? "▷" : "Ⅱ";
   $("#hero-pause").setAttribute(
@@ -116,7 +111,7 @@ function changeHero(index) {
   state.heroPlayer = null;
   $("#hero-player").replaceChildren();
   state.heroIndex = (index + featuredWorks.length) % featuredWorks.length;
-  state.heroManualPause = motionPreference.matches;
+  state.heroManualPause = false;
   const work = featuredWorks[state.heroIndex];
   setText("#hero-title", work.title);
   $("#hero-stage").style.background = work.heroBackground || "#627365";
@@ -167,6 +162,8 @@ function changeHero(index) {
           $("#hero-pause").disabled = false;
           // Success may be synchronous in mocked/cached runtimes.
           state.heroPlayer = player;
+          const track = player.animationState.getTrack(0);
+          if (track) track.loop = true;
           syncHeroPlayback();
         },
         error,
@@ -475,7 +472,7 @@ function openWork(work, list = filteredWorks()) {
             if (initial) {
               $("#animation-select").value = initial.name;
               player.config.animation = initial.name;
-              player.setAnimation(initial.name);
+              player.setAnimation(initial.name, true);
             }
             $("#animation-select").disabled = animations.length === 0;
             $("#viewer-playback").disabled = false;
@@ -622,22 +619,6 @@ $("#hero-pause").addEventListener("click", () => {
   state.heroManualPause = !state.heroManualPause;
   syncHeroPlayback();
 });
-if ("IntersectionObserver" in window) {
-  new IntersectionObserver(
-    (entries) => {
-      state.heroVisible = entries[0].isIntersecting;
-      syncHeroPlayback();
-    },
-    { threshold: 0.1 },
-  ).observe($("#hero-stage"));
-}
-document.addEventListener("visibilitychange", () => {
-  syncHeroPlayback();
-  if (document.hidden && state.viewerPlayer?.skeleton) {
-    state.viewerPlayer.pause();
-    syncPlaybackButton();
-  }
-});
 document.querySelectorAll("[data-filter]").forEach((button) =>
   button.addEventListener("click", () => {
     state.filter = button.dataset.filter;
@@ -683,7 +664,7 @@ $("#animation-select").addEventListener("change", (event) => {
   if (!player?.skeleton || !event.target.value) return;
   try {
     player.config.animation = event.target.value;
-    player.setAnimation(event.target.value);
+    player.setAnimation(event.target.value, true);
     player.play();
     syncPlaybackButton();
   } catch (error) {
