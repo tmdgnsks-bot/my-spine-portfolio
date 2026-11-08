@@ -220,7 +220,7 @@ function attachPoster(preview, work, number) {
     image.addEventListener("error", () => image.remove(), { once: true });
     preview.append(image);
   }
-  if (isSpine(work)) {
+  if (isSpine(work) && !work.thumbnail) {
     if (snapshotCache.has(work.id))
       setSnapshot(preview, snapshotCache.get(work.id));
     else if (snapshotObserver) {

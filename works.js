@@ -20,8 +20,8 @@ const works = [
     atlas: "assets/nc1/Portrait_NPC_Mento_MA.atlas",
     animation: "idle",
     spineVersion: "4.3",
-    thumbnail: "assets/nc1/thumbnail.png",
-    backgroundColor: "#202923",
+    thumbnail: "assets/previews/lineage-w-mage.webp",
+    backgroundColor: "#627365",
     featured: true,
   },
   {
@@ -36,8 +36,8 @@ const works = [
     atlas: "assets/ar15/AR15.atlas",
     animation: "idle",
     spineVersion: "4.3",
-    thumbnail: "assets/ar15/thumbnail.png",
-    backgroundColor: "#322c37",
+    thumbnail: "assets/previews/ar15-study.webp",
+    backgroundColor: "#514753",
     featured: true,
   },
   {
@@ -53,8 +53,9 @@ const works = [
     animation: "run",
     hideAnimations: ["LR", "up_down"],
     spineVersion: "4.3",
-    backgroundColor: "#29343d",
+    backgroundColor: "#4e606d",
     featured: true,
+    thumbnail: "assets/previews/hk419-motion.webp",
   },
   {
     id: "burst-sample",
@@ -83,5 +84,6 @@ const works = [
     spineVersion: "4.3",
     backgroundColor: "#303032",
     sample: true,
+    thumbnail: "assets/previews/spineboy-sample.webp",
   },
 ];
