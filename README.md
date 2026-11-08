@@ -143,3 +143,23 @@ python3 -m http.server 8000
 - 이름/한줄소개/연락처: `index.html`의 `<header class="hero">` 안쪽
 - 색상 테마: `style.css` 최상단 `:root { ... }` 변수
 - 카드 그리드 열 개수: `style.css`의 `.grid { grid-template-columns: ... }`
+
+
+## 동영상 추가
+
+`assets/showreel/`에 MP4 또는 WebM 파일과 미리보기 이미지를 넣고 `works.js` 배열에 아래 항목을 추가합니다. 실제 파일 경로로 변경하세요.
+
+```js
+{
+  id: "showreel",
+  title: "애니메이션 쇼릴",
+  role: "리깅 & 애니메이션",
+  tags: ["쇼릴", "영상"],
+  description: "담당 역할과 작업 내용을 적어주세요.",
+  type: "video",
+  media: "assets/showreel/showreel.mp4",
+  thumbnail: "assets/showreel/cover.webp",
+},
+```
+
+PNG/JPG/WebP 등 이미지는 GIF와 동일하게 `type: "sprite"`로 표시할 수 있습니다. 이 사이트는 GitHub에 파일을 올리고 `works.js`를 수정하는 방식이며 방문자용 업로드 기능은 없습니다. 대용량 영상은 외부 호스팅을 사용하는 것이 좋습니다.
