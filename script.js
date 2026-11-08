@@ -3,7 +3,7 @@
 const $ = (selector) => document.querySelector(selector);
 const allWorks = Array.isArray(works) ? works : [];
 const featuredWorks = allWorks.filter(
-  (work) => work.featured && (work.type || "spine") === "spine",
+  (work) => !work.sample && work.featured !== false,
 );
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const state = {
@@ -11,6 +11,9 @@ const state = {
   query: "",
   heroIndex: 0,
   heroPlayer: null,
+  heroMediaElement: null,
+  heroPlaybackError: null,
+  heroReady: false,
   heroToken: 0,
   heroManualPause: false,
   viewerPlayer: null,
@@ -94,18 +97,47 @@ function visibleAnimations(player, work) {
   return animations.length ? animations : data.animations;
 }
 function syncHeroPlayback() {
+  if (!state.heroReady) return;
   const player = state.heroPlayer;
-  if (!player?.skeleton) return;
-  // Only an explicit click on the preview's pause button changes playback.
-  // Avoid calling play() again while it is running so the current track is preserved.
-  if (state.heroManualPause && !player.paused) player.pause();
-  else if (!state.heroManualPause && player.paused) player.play();
-  setText("#hero-status", player.paused ? "미리보기 일시정지" : "● 재생 중");
-  $("#hero-pause").textContent = player.paused ? "▷" : "Ⅱ";
+  const element = state.heroMediaElement;
+  if (player?.skeleton) {
+    if (state.heroManualPause && !player.paused) player.pause();
+    else if (!state.heroManualPause && player.paused) player.play();
+  } else if (element?.tagName === "VIDEO") {
+    if (state.heroManualPause && !element.paused) element.pause();
+    else if (!state.heroManualPause && element.paused !== false) {
+      const onFailure = state.heroPlaybackError;
+      try {
+        element.play()?.catch(onFailure);
+      } catch (error) {
+        onFailure?.();
+      }
+    }
+  }
+  const imageOnly = element?.tagName === "IMG";
+  setText(
+    "#hero-status",
+    state.heroManualPause
+      ? imageOnly
+        ? "자동 전환 일시정지"
+        : "미리보기 일시정지"
+      : "● 재생 중",
+  );
+  $("#hero-pause").textContent = state.heroManualPause ? "▷" : "Ⅱ";
   $("#hero-pause").setAttribute(
     "aria-label",
-    player.paused ? "미리보기 재생" : "미리보기 일시정지",
+    imageOnly
+      ? state.heroManualPause
+        ? "자동 전환 재개"
+        : "자동 전환 일시정지"
+      : state.heroManualPause
+        ? "미리보기 재생"
+        : "미리보기 일시정지",
   );
+}
+function getHeroMedia(work) {
+  if (work.heroVideo) return { ...work, type: "video", media: work.heroVideo };
+  return { ...work, ...(work.mediaItems?.[0] || {}) };
 }
 function stopHeroRotation() {
   if (heroRotationTimer !== null) {
@@ -129,12 +161,25 @@ function changeHero(index) {
   const token = ++state.heroToken;
   destroyPlayer(state.heroPlayer);
   state.heroPlayer = null;
+  if (state.heroMediaElement?.tagName === "VIDEO") {
+    state.heroMediaElement.pause();
+    state.heroMediaElement.removeAttribute("src");
+    state.heroMediaElement.load();
+  }
+  state.heroMediaElement = null;
+  state.heroReady = false;
   $("#hero-player").replaceChildren();
   state.heroIndex = (index + featuredWorks.length) % featuredWorks.length;
   state.heroManualPause = false;
   const work = featuredWorks[state.heroIndex];
+  const selected = getHeroMedia(work);
   setText("#hero-title", work.title);
-  $("#hero-stage").style.background = work.heroBackground || "#627365";
+  setText(
+    "#hero-format",
+    work.heroVideo ? formatType(work) : formatType(selected),
+  );
+  $("#hero-stage").style.background =
+    work.heroBackground || work.backgroundColor || "#627365";
   const poster = $("#hero-poster");
   poster.classList.remove("is-loaded");
   if (work.thumbnail) {
@@ -151,16 +196,58 @@ function changeHero(index) {
       button.setAttribute("aria-pressed", String(i === state.heroIndex));
     });
   setText("#hero-status", "미리보기 불러오는 중");
+  function ready() {
+    if (token !== state.heroToken || state.heroReady) return;
+    state.heroReady = true;
+    poster.classList.add("is-loaded");
+    $("#hero-error").hidden = true;
+    $("#hero-pause").disabled = false;
+    syncHeroPlayback();
+    scheduleHeroRotation();
+  }
   function error() {
     if (token !== state.heroToken) return;
+    state.heroReady = false;
     setText("#hero-status", "미리보기");
     setText(
       "#hero-error",
-      "실시간 미리보기를 불러오지 못했습니다. 자세히 보기에서 다시 시도해 주세요.",
+      "미리보기를 재생하지 못했습니다. 자세히 보기에서 확인해 주세요.",
     );
     $("#hero-error").hidden = false;
+    $("#hero-pause").disabled = true;
     poster.classList.remove("is-loaded");
     scheduleHeroRotation();
+  }
+  state.heroPlaybackError = error;
+  if (!isSpine(selected)) {
+    const videoMode = selected.type === "video";
+    const element = document.createElement(videoMode ? "video" : "img");
+    element.className = "hero-media";
+    if (videoMode) {
+      element.muted = true;
+      element.defaultMuted = true;
+      element.autoplay = true;
+      element.loop = true;
+      element.playsInline = true;
+      element.preload = "auto";
+      for (const attribute of ["muted", "autoplay", "loop", "playsinline"])
+        element.setAttribute(attribute, "");
+      element.poster = work.thumbnail || "";
+      element.addEventListener("loadeddata", ready, { once: true });
+    } else {
+      element.alt = work.title;
+      element.addEventListener("load", ready, { once: true });
+    }
+    element.addEventListener("error", error);
+    state.heroMediaElement = element;
+    $("#hero-player").append(element);
+    const src = selected.media || selected.thumbnail;
+    if (!src) {
+      error();
+      return;
+    }
+    element.src = src;
+    return;
   }
   if (!window.spine?.SpinePlayer) {
     error();
@@ -169,7 +256,7 @@ function changeHero(index) {
   try {
     state.heroPlayer = new window.spine.SpinePlayer(
       $("#hero-player"),
-      playerConfig(work, {
+      playerConfig(selected, {
         viewport: {
           padLeft: "1%",
           padRight: "1%",
@@ -178,15 +265,10 @@ function changeHero(index) {
         },
         success(player) {
           if (token !== state.heroToken) return;
-          poster.classList.add("is-loaded");
-          setText("#hero-status", "● 재생 중");
-          $("#hero-pause").disabled = false;
-          // Success may be synchronous in mocked/cached runtimes.
           state.heroPlayer = player;
           const track = player.animationState.getTrack(0);
           if (track) track.loop = true;
-          syncHeroPlayback();
-          scheduleHeroRotation();
+          ready();
         },
         error,
       }),
@@ -233,9 +315,30 @@ function filteredWorks() {
 }
 function attachPoster(preview, work, number) {
   preview.append(makePlaceholder());
-  const src =
-    work.thumbnail ||
-    (!isSpine(work) && work.type !== "video" ? work.media : null);
+  const tiled = work.thumbnailLayout === "grid" && work.mediaItems?.length;
+  if (tiled) {
+    preview.querySelector(".card-placeholder")?.remove();
+    const grid = document.createElement("div");
+    grid.className = "thumbnail-grid";
+    work.mediaItems.forEach((item) => {
+      if (!item.thumbnail) return;
+      const tile = document.createElement("div");
+      tile.className = "thumbnail-grid-tile";
+      const image = document.createElement("img");
+      image.src = item.thumbnail;
+      image.alt = item.title;
+      image.loading = "lazy";
+      const label = document.createElement("span");
+      label.textContent = item.title;
+      tile.append(image, label);
+      grid.append(tile);
+    });
+    preview.append(grid);
+  }
+  const src = tiled
+    ? null
+    : work.thumbnail ||
+      (!isSpine(work) && work.type !== "video" ? work.media : null);
   if (src) {
     const image = document.createElement("img");
     image.src = src;
@@ -308,7 +411,10 @@ function renderWorks() {
   items.forEach((work, index) => {
     const card = document.createElement("button");
     card.type = "button";
-    card.className = "work-card";
+    card.className =
+      work.thumbnailLayout === "grid"
+        ? "work-card work-card--grid"
+        : "work-card";
     card.setAttribute(
       "aria-label",
       `${work.title} — ${formatType(work)} 작품 열기`,

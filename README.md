@@ -6,7 +6,7 @@
 
 ## 구성
 
-- 첫 화면에서 대표 Spine 캐릭터 실시간 재생, 6초마다 다음 작품으로 순환, 재생/일시정지
+- 첫 화면에서 Spine·GIF·동영상 작품 미리보기, 6초마다 다음 작품으로 순환, 재생/일시정지
 - 실제 작업 / 샘플을 나눈 갤러리, 형식 필터, 제목·설명·태그 검색
 - Spine 4.3 JSON·binary, GIF·이미지, MP4·WebM, YouTube·Vimeo 임베드
 - 상세 뷰어: 애니메이션·속도 선택, 공식 플레이어의 스킨/재생 컨트롤, 배경 변경, 전체 화면
@@ -55,7 +55,7 @@ vendor/spine-player/ 공식 Spine 4.3 런타임과 스타일
   // skin: "default",                       // 선택: 기본 스킨
   // hideAnimations: ["slider-helper"],      // 선택: 메뉴에서 숨길 클립
   // premultipliedAlpha: true,               // 내보내기와 맞추기; 기본 true
-  featured: true,                           // 첫 화면 대표 작품에 포함
+  featured: true,                           // 기본 포함; false로 제외
 },
 ```
 
@@ -159,3 +159,9 @@ Spine®은 Esoteric Software의 상표입니다. 런타임과 공식 샘플은 �
 검증: JavaScript 구문, 데이터 경로, atlas 텍스처 참조, 실제 4.3 런타임의 JSON 파싱, DOM 상호작용을 확인했습니다. 이 작업 환경에는 공유 Chrome 제어 도구가 없어 실제 WebGL 렌더링과 화면별 시각 검증은 수행하지 못했습니다. 실제 기기에서 확인할 수 있도록 GitHub Pages 배포 상태와 공개 파일 응답을 확인합니다.
 
 리니지W 마법사 NPC 작품은 동영상과 기존 Spine 뷰어를 함께 제공합니다. Video와 Spine 필터 모두에서 찾을 수 있습니다.
+
+## 최상단 미리보기와 모음 썸네일
+
+샘플을 제외한 모든 작품을 6초 자동 전환에 포함합니다. `featured: false`로 개별 작품을 제외할 수 있습니다. 동영상이 있는 작품은 첫 번째 영상부터 표시하며, `heroVideo`에 가벼운 MP4 미리보기를 별도로 지정할 수도 있습니다. 현재 GIF 작품의 최상단 MP4는 원본 GIF에서 변환한 재생용 파일이며, 상세 뷰어에서는 원본 GIF를 유지합니다.
+
+`thumbnailLayout: "grid"`를 지정하면 `mediaItems`의 썸네일을 2열로 표시합니다. 슬라임 퀘스트는 이 방식으로 4개 NPC를 한 카드에 표시합니다.

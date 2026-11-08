@@ -4,7 +4,7 @@
  * Spine: skeleton + atlas + atlas가 참조하는 PNG 파일이 필요합니다. 버전은 4.3.
  * 이미지/GIF/영상: media에 파일 경로를 입력하세요. 영상 썸네일은 thumbnail.
  * sample: true인 항목은 개인 작업과 구분하여 샘플 탭에만 표시합니다.
- * featured: true인 Spine 작업은 첫 화면의 실시간 무대에 표시합니다.
+ * 샘플을 제외한 모든 작품을 첫 화면에 표시합니다. featured: false로 제외합니다.
  * 전체 예시는 README.md에 있습니다.
  */
 const works = [
@@ -45,6 +45,8 @@ const works = [
         thumbnail: "assets/previews/slime-spider.webp",
       },
     ],
+    heroVideo: "assets/hero-previews/slime-quest.mp4",
+    thumbnailLayout: "grid",
   },
   {
     id: "lineage-w-zillian",
@@ -101,6 +103,7 @@ const works = [
         thumbnail: "assets/previews/turn-rpg-mermaid.webp",
       },
     ],
+    heroVideo: "assets/hero-previews/turn-rpg.mp4",
   },
   {
     id: "eire-fanart",
@@ -113,6 +116,7 @@ const works = [
     media: "assets/eire-fanart/eire.gif",
     thumbnail: "assets/previews/eire-fanart.webp",
     backgroundColor: "#71735f",
+    heroVideo: "assets/hero-previews/eire.mp4",
   },
   {
     id: "frog-witch",
