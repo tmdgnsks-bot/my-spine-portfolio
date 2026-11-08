@@ -9,6 +9,44 @@
  */
 const works = [
   {
+    id: "slime-quest-encounter-npcs",
+    title: "슬라임 퀘스트 · 인카운터 NPC 모션",
+    role: "NPC 애니메이션",
+    tags: ["슬라임 퀘스트", "인카운터 NPC", "대기 모션"],
+    description:
+      "슬라임 퀘스트에 사용된 인카운터 NPC 모션 작업입니다. 가고일, 고블린, 리치, 거미의 대기 모션을 모았습니다.",
+    type: "gif",
+    media: "assets/slime-quest-npcs/gargoyle-idle.gif",
+    thumbnail: "assets/previews/slime-gargoyle.webp",
+    backgroundColor: "#808080",
+    mediaItems: [
+      {
+        title: "가고일",
+        type: "gif",
+        media: "assets/slime-quest-npcs/gargoyle-idle.gif",
+        thumbnail: "assets/previews/slime-gargoyle.webp",
+      },
+      {
+        title: "고블린",
+        type: "gif",
+        media: "assets/slime-quest-npcs/goblin-idle.gif",
+        thumbnail: "assets/previews/slime-goblin.webp",
+      },
+      {
+        title: "리치",
+        type: "gif",
+        media: "assets/slime-quest-npcs/lich-idle.gif",
+        thumbnail: "assets/previews/slime-lich.webp",
+      },
+      {
+        title: "거미",
+        type: "gif",
+        media: "assets/slime-quest-npcs/spider-idle.gif",
+        thumbnail: "assets/previews/slime-spider.webp",
+      },
+    ],
+  },
+  {
     id: "lineage-w-zillian",
     title: "리니지W · 궁수 NPC 질리언",
     role: "Spine 애니메이션",
