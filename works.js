@@ -9,6 +9,40 @@
  */
 const works = [
   {
+    id: "thief-goblin",
+    title: "도적 고블린",
+    role: "캐릭터 애니메이션",
+    tags: ["고블린", "도적", "캐릭터"],
+    description:
+      "도적 고블린 캐릭터의 대기, 걷기, 달리기, 공격, 피격 모션을 담은 Spine 애니메이션 작업입니다.",
+    type: "spine",
+    skeleton: "assets/thief-goblin/30400_thief_c_warrior.json",
+    atlas: "assets/thief-goblin/30400_thief_c_warrior.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    premultipliedAlpha: true,
+    thumbnail: "assets/previews/thief-goblin.webp",
+    backgroundColor: "#5c665f",
+    heroBackground: "#64736a",
+  },
+  {
+    id: "wolf-monster",
+    title: "늑대 몬스터",
+    role: "캐릭터 애니메이션",
+    tags: ["늑대", "몬스터", "캐릭터"],
+    description:
+      "늑대 몬스터의 대기, 걷기, 점프, 공격, 피격 모션을 담은 Spine 애니메이션 작업입니다.",
+    type: "spine",
+    skeleton: "assets/wolf-monster/30600_wolf_c_warrior.json",
+    atlas: "assets/wolf-monster/30600_wolf_c_warrior.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    premultipliedAlpha: true,
+    thumbnail: "assets/previews/wolf-monster.webp",
+    backgroundColor: "#5f6572",
+    heroBackground: "#6b7483",
+  },
+  {
     id: "dog-walk",
     title: "강아지 걷기",
     role: "캐릭터 애니메이션",
