@@ -26,6 +26,8 @@ const snapshotCache = new Map();
 const snapshotQueue = [];
 let snapshotBusy = false;
 let snapshotObserver;
+const HERO_ROTATION_MS = 6000;
+let heroRotationTimer = null;
 
 function formatType(work) {
   const type = work.type || "spine";
@@ -105,7 +107,24 @@ function syncHeroPlayback() {
     player.paused ? "미리보기 재생" : "미리보기 일시정지",
   );
 }
+function stopHeroRotation() {
+  if (heroRotationTimer !== null) {
+    clearTimeout(heroRotationTimer);
+    heroRotationTimer = null;
+  }
+}
+function scheduleHeroRotation() {
+  stopHeroRotation();
+  if (featuredWorks.length < 2 || state.heroManualPause) return;
+  const token = state.heroToken;
+  heroRotationTimer = setTimeout(() => {
+    heroRotationTimer = null;
+    if (token !== state.heroToken || state.heroManualPause) return;
+    changeHero(state.heroIndex + 1);
+  }, HERO_ROTATION_MS);
+}
 function changeHero(index) {
+  stopHeroRotation();
   if (!featuredWorks.length) return;
   const token = ++state.heroToken;
   destroyPlayer(state.heroPlayer);
@@ -141,6 +160,7 @@ function changeHero(index) {
     );
     $("#hero-error").hidden = false;
     poster.classList.remove("is-loaded");
+    scheduleHeroRotation();
   }
   if (!window.spine?.SpinePlayer) {
     error();
@@ -166,6 +186,7 @@ function changeHero(index) {
           const track = player.animationState.getTrack(0);
           if (track) track.loop = true;
           syncHeroPlayback();
+          scheduleHeroRotation();
         },
         error,
       }),
@@ -711,6 +732,8 @@ $("#hero-open").addEventListener("click", () => {
 $("#hero-pause").addEventListener("click", () => {
   state.heroManualPause = !state.heroManualPause;
   syncHeroPlayback();
+  if (state.heroManualPause) stopHeroRotation();
+  else scheduleHeroRotation();
 });
 document.querySelectorAll("[data-filter]").forEach((button) =>
   button.addEventListener("click", () => {
