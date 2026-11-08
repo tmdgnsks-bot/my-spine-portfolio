@@ -9,6 +9,23 @@
  */
 const works = [
   {
+    id: "demon-follower",
+    title: "악마 추종자",
+    role: "캐릭터 애니메이션",
+    tags: ["악마 추종자", "캐릭터", "Spine"],
+    description:
+      "악마 추종자 캐릭터의 대기, 이동, 공격, 피격, 사망 모션을 담은 Spine 애니메이션 작업입니다.",
+    type: "spine",
+    skeleton: "assets/demon-follower/30003_demonsFollower.json",
+    atlas: "assets/demon-follower/30003_demonsFollower.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    premultipliedAlpha: false,
+    thumbnail: "assets/previews/demon-follower.webp",
+    backgroundColor: "#656570",
+    heroBackground: "#656570",
+  },
+  {
     id: "legend-of-slime-skills",
     title: "레전드 오브 슬라임 · 스킬 연출",
     role: "스킬 애니메이션",
