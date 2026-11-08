@@ -1,0 +1,52 @@
+31100_witch_c_frog.png
+size:2048,512
+filter:Linear,Linear
+pma:true
+Frog_Body
+bounds:928,123,158,129
+offsets:2,0,161,129
+Frog_Body2
+bounds:758,74,170,178
+offsets:1,0,171,178
+Frog_Foot1
+bounds:898,208,38,44
+offsets:0,1,38,45
+Frog_Foot2
+bounds:2008,208,38,45
+Frog_Foot3
+bounds:1214,213,71,39
+offsets:0,0,77,39
+Frog_Foot4
+bounds:1283,213,71,39
+offsets:1,0,77,39
+Frog_Hat
+bounds:1075,112,140,115
+rotate:90
+Frog_Leg1
+bounds:1159,198,59,54
+offsets:7,3,66,57
+Frog_Leg2
+bounds:1159,198,59,54
+offsets:7,3,66,57
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00000
+bounds:506,2,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00001
+bounds:254,2,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00002
+bounds:2,2,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00003
+bounds:1766,254,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00004
+bounds:1514,254,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00005
+bounds:1262,254,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00006
+bounds:1010,254,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00007
+bounds:758,254,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00008
+bounds:506,254,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00009
+bounds:254,254,250,250
+effect/E111lements - Explosion 019 Hit Radial noCT noRSZ_00010
+bounds:2,254,250,250

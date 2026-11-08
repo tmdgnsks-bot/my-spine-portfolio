@@ -9,6 +9,22 @@
  */
 const works = [
   {
+    id: "frog-witch",
+    title: "개구리 마녀",
+    role: "캐릭터 애니메이션",
+    tags: ["개구리", "마녀", "캐릭터"],
+    description: "개구리 마녀 캐릭터의 대기, 이동, 공격 애니메이션입니다.",
+    type: "spine",
+    skeleton: "assets/frog-witch/31100_witch_c_frog.json",
+    atlas: "assets/frog-witch/31100_witch_c_frog.atlas",
+    animation: "idle",
+    spineVersion: "4.3",
+    thumbnail: "assets/previews/frog-witch.webp",
+    backgroundColor: "#596b64",
+    heroBackground: "#657b70",
+    featured: true,
+  },
+  {
     id: "skeleton-knight",
     title: "스켈레톤 기사",
     role: "캐릭터 애니메이션",
