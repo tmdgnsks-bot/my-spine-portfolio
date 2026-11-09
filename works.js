@@ -9,6 +9,22 @@
  */
 const works = [
   {
+    id: "princess-rush-snow-white",
+    title: "프린세스 러시 · 백설공주",
+    role: "캐릭터 애니메이션",
+    tags: ["프린세스 러시", "백설공주", "Spine"],
+    description: "프린세스 러시 백설공주 캐릭터의 대기, 달리기, 공격 모션을 담은 Spine 애니메이션 작업입니다.",
+    type: "spine",
+    skeleton: "assets/princess-rush-snow-white/princess2.json",
+    atlas: "assets/princess-rush-snow-white/princess_f_2.atlas.txt",
+    animation: "idle",
+    hideAnimations: ["face_slide"],
+    spineVersion: "4.3",
+    premultipliedAlpha: true,
+    backgroundColor: "#656570",
+    heroBackground: "#656570",
+  },
+  {
     id: "thief-goblin",
     title: "도적 고블린",
     role: "캐릭터 애니메이션",
