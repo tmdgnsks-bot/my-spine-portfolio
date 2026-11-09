@@ -176,7 +176,7 @@ const works = [
   {
     id: "lineage-w-zillian",
     title: "리니지W · 궁수 NPC 질리언",
-    role: "Spine 애니메이션",
+    role: "NPC 애니메이션",
     tags: ["리니지W", "궁수", "NPC"],
     description:
       "리니지W 궁수 NPC 질리언의 Spine 애니메이션 작업입니다. 동영상과 Spine 뷰어로 확인할 수 있습니다.",
@@ -279,7 +279,7 @@ const works = [
   {
     id: "lineage-w-mage",
     title: "리니지W · 마법사 NPC",
-    role: "리깅 & 애니메이션",
+    role: "NPC 애니메이션",
     tags: ["NPC", "캐릭터", "리깅"],
     description:
       "리니지W 외주 작업. 마법사 튜토리얼 NPC의 리깅과 애니메이션을 담당했습니다.",
