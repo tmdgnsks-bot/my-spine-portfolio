@@ -10,6 +10,7 @@
 const works = [
   {
     id: "princess-rush-snow-white",
+    thumbnail: "assets/previews/princess-rush-snow-white.png",
     title: "프린세스 러시 · 백설공주",
     role: "캐릭터 애니메이션",
     tags: ["프린세스 러시", "백설공주", "Spine"],
