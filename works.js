@@ -9,12 +9,31 @@
  */
 const works = [
   {
+    id: "mage-girl",
+    title: "마법사 소녀",
+    role: "캐릭터 애니메이션",
+    tags: ["마법사", "소녀", "Spine"],
+    description:
+      "마법사 소녀 캐릭터의 대기 모션을 담은 Spine 애니메이션 작업입니다.",
+    type: "spine",
+    skeleton: "assets/mage-girl/girl.json",
+    atlas: "assets/mage-girl/girl.atlas",
+    animation: "idle",
+    hideAnimations: ["slide"],
+    spineVersion: "4.3",
+    premultipliedAlpha: true,
+    thumbnail: "assets/previews/mage-girl.webp",
+    backgroundColor: "#656570",
+    heroBackground: "#656570",
+  },
+  {
     id: "princess-rush-snow-white",
     thumbnail: "assets/previews/princess-rush-snow-white.png",
     title: "프린세스 러시 · 백설공주",
     role: "캐릭터 애니메이션",
     tags: ["프린세스 러시", "백설공주", "Spine"],
-    description: "프린세스 러시 백설공주 캐릭터의 대기, 달리기, 공격 모션을 담은 Spine 애니메이션 작업입니다.",
+    description:
+      "프린세스 러시 백설공주 캐릭터의 대기, 달리기, 공격 모션을 담은 Spine 애니메이션 작업입니다.",
     type: "spine",
     skeleton: "assets/princess-rush-snow-white/princess2.json",
     atlas: "assets/princess-rush-snow-white/princess_f_2.atlas.txt",
