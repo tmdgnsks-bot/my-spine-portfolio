@@ -9,6 +9,19 @@
  */
 const works = [
   {
+    id: "bluestone-npc",
+    title: "블루스톤 · NPC",
+    role: "NPC 애니메이션",
+    tags: ["블루스톤", "NPC", "GIF"],
+    description: "블루스톤 NPC의 대기 모션 작업입니다.",
+    type: "gif",
+    media: "assets/bluestone-npc/npc-idle.gif",
+    thumbnail: "assets/previews/bluestone-npc.webp",
+    heroVideo: "assets/hero-previews/bluestone-npc.mp4",
+    backgroundColor: "#858585",
+    heroBackground: "#858585",
+  },
+  {
     id: "mage-girl",
     title: "마법사 소녀",
     role: "캐릭터 애니메이션",
