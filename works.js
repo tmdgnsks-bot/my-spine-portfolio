@@ -299,7 +299,7 @@ const works = [
     description:
       "스켈레톤 기사 캐릭터의 대기, 이동, 피격, 공격 및 스킬 애니메이션입니다.",
     type: "spine",
-    skeleton: "assets/skeleton-knight/40300_skeleton_mBoss_c_shield.json",
+    skeleton: "assets/skeleton-knight/40300_skeleton_mBoss_c_shield_v2.json",
     atlas: "assets/skeleton-knight/40300_skeleton_mBoss_c_shield.atlas",
     animation: "attack",
     spineVersion: "4.3",
