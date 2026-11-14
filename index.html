@@ -18,6 +18,8 @@
     />
     <link rel="stylesheet" href="vendor/spine-player/spine-player.min.css" />
     <link rel="stylesheet" href="style.css?v=20261108t" />
+    <link rel="stylesheet" href="battle/style.css" />
+    <script type="module" src="battle/scene.js"></script>
     <script defer src="vendor/spine-player/spine-player.min.js"></script>
     <script defer src="works.js?v=20261114-quadruped-sheep"></script>
     <script defer src="script.js?v=20261108t"></script>
@@ -30,6 +32,7 @@
       >
       <nav aria-label="주 메뉴">
         <a href="#work">Work <span id="nav-work-count">15</span></a
+        ><a href="#battle">Battle</a
         ><a href="#about">About</a
         ><a href="#contact">Contact <span>↗</span></a>
       </nav>
@@ -164,6 +167,38 @@
             작업물 목록과 Spine 뷰어를 사용하려면 JavaScript를 켜 주세요.
           </p></noscript
         >
+      </section>
+      <section id="battle" class="battle-section shell" aria-labelledby="battle-heading" tabindex="0">
+        <div class="section-heading">
+          <div><p class="eyebrow">INTERACTIVE / 01</p><h2 id="battle-heading">전투 애니메이션 랩</h2></div>
+          <p>모션의 타이밍과 무게감을 직접 확인하는 공간</p>
+        </div>
+        <div class="battle-frame">
+          <div class="battle-top"><span data-battle-status role="status">씬 준비 중…</span><button type="button" data-battle-reset>초기화 ↻</button></div>
+          <div class="battle-stage" aria-label="왼쪽 플레이어와 오른쪽 훈련용 더미가 배치된 전투 씬">
+            <div class="battle-hud">
+              <label>PLAYER <span data-health-text="player"></span><progress data-health="player" aria-label="플레이어 체력"></progress></label>
+              <label>TRAINING DUMMY <span data-health-text="dummy"></span><progress data-health="dummy" aria-label="훈련용 더미 체력"></progress></label>
+            </div>
+            <div class="battle-floor" aria-hidden="true"></div>
+            <div class="battle-actor battle-player" data-actor="player" data-state="loading">
+              <div class="battle-placeholder" aria-hidden="true"><i></i><b></b><em></em></div>
+              <div class="battle-spine"></div>
+              <p class="battle-actor-status" role="status">PLAYER · 준비 중</p>
+            </div>
+            <div class="battle-actor battle-dummy" data-actor="dummy" data-state="loading">
+              <div class="battle-placeholder" aria-hidden="true"><i></i><b></b><em></em></div>
+              <div class="battle-spine"></div>
+              <p class="battle-actor-status" role="status">TRAINING DUMMY · 준비 중</p>
+            </div>
+            <span class="battle-stage-note">IDLE STUDY · 16:9</span>
+          </div>
+          <div class="battle-controls" aria-label="예정된 조작키">
+            <span><kbd>A</kbd> 기본 공격</span><span><kbd>S</kbd> 강공격</span><span><kbd>D</kbd> 스킬</span><span><kbd>Space</kbd> 회피</span><span><kbd>R</kbd> 초기화</span>
+          </div>
+        </div>
+        <p class="battle-note">1단계 기본 씬 · 현재 Idle 재생과 초기화를 지원합니다. 공격과 터치 조작은 2단계에서 연결합니다. 키보드 초기화는 이 영역에 초점을 둔 상태에서 동작합니다.</p>
+        <div data-battle-debug hidden class="battle-debug"><strong>개발자 · Idle 로딩 확인</strong><p>플레이어: <span data-debug-actor="player"></span></p><p>더미: <span data-debug-actor="dummy"></span></p></div>
       </section>
       <section
         class="about-section shell"
